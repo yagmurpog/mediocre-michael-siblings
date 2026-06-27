@@ -45,7 +45,6 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 			if not flagpoleEndReached:
 				play_animation("hold")
-			await get_tree().create_timer(1.0).timeout
 			if not is_on_floor():
 				velocity += get_gravity() * 5 * delta
 			else:
@@ -121,51 +120,48 @@ func goomba_stomp():
 
 # very jank
 func play_animation(animationName):
-	if status == 0:
-		if animationName == "idle":
-			sprite.play("idle")
-		if animationName == "run":
-			sprite.play("run")
-		if animationName == "die":
-			sprite.play("die")
-		if animationName == "get_big":
-			sprite.play("get_big")
-		if animationName == "turn_around":
-			sprite.play("turn_around")
-		if animationName == "jump":
-			sprite.play("jump")
-		if animationName == "hold":
-			sprite.play("hold")
-	if status == 1:
-		if animationName == "idle":
-			sprite.play("big_idle")
-		if animationName == "run":
-			sprite.play("big_run")
-		if animationName == "die":
-			sprite.play("die")
-		if animationName == "get_big":
-			sprite.play("get_big")
-		if animationName == "turn_around":
-			sprite.play("turn_around")
-		if animationName == "jump":
-			sprite.play("big_jump")
-		if animationName == "hold":
-			sprite.play("big_hold")
-	if status == 2:
-		if animationName == "idle":
-			sprite.play("fire_idle")
-		if animationName == "run":
-			sprite.play("fire_run")
-		if animationName == "die":
-			sprite.play("die")
-		if animationName == "get_big":
-			sprite.play("get_big")
-		if animationName == "turn_around":
-			sprite.play("fire_turn_around")
-		if animationName == "jump":
-			sprite.play("fire_jump")
-		if animationName == "hold":
-			sprite.play("fire_hold")
+	match status:
+		0: #small
+			match animationName:
+				"idle":
+					sprite.play("idle")
+				"run":
+					sprite.play("run")
+				"die":
+					sprite.play("die")
+				"get_big":
+					sprite.play("get_big")
+				"turn_around":
+					sprite.play("turn_around")
+				"jump":
+					sprite.play("jump")
+				"hold":
+					sprite.play("hold")
+
+		1: #big
+			match animationName:
+				"idle":
+					sprite.play("big_idle")
+				"run":
+					sprite.play("big_run")
+				"turn_around":
+					sprite.play("big_turn_around")
+				"jump":
+					sprite.play("big_jump")
+				"hold":
+					sprite.play("big_hold")
+		2: #fire
+			match animationName:
+				"idle":
+					sprite.play("fire_idle")
+				"run":
+					sprite.play("fire_run")
+				"turn_around":
+					sprite.play("fire_turn_around")
+				"jump":
+					sprite.play("fire_jump")
+				"hold":
+					sprite.play("fire_hold")
 		
 func jump(delta):
 		if Input.is_action_pressed("jump") and is_on_floor():

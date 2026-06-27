@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dkp3x5w5chkwi"]
+
+[ext_resource type="Script" uid="uid://bmlelaqpx7ynn" path="res://scripts/flagpole.gd" id="1_vl3mc"]
+[ext_resource type="Texture2D" uid="uid://cptlsrm3veejf" path="res://assets/tileset.png" id="2_l37vd"]
+[ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="3_l37vd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_choun"]
+atlas = ExtResource("2_l37vd")
+region = Rect2(0, 588, 16, 176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(2, 152)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqcyk"]
+atlas = ExtResource("3_l37vd")
+region = Rect2(92, 90, 15, 16)
+
+[sub_resource type="Animation" id="Animation_l37vd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlagSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(48, -136)]
+}
+
+[sub_resource type="Animation" id="Animation_kqcyk"]
+resource_name = "flag_down"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlagSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(48, -136), Vector2(48, -8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn37d"]
+_data = {
+&"RESET": SubResource("Animation_l37vd"),
+&"flag_down": SubResource("Animation_kqcyk")
+}
+
+[node name="Flagpole" type="Node2D" unique_id=2050015406]
+script = ExtResource("1_vl3mc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2123321423]
+position = Vector2(56, -72)
+texture = SubResource("AtlasTexture_choun")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1843486471]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1472006159]
+position = Vector2(56, 8)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=696744503]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=473064862]
+position = Vector2(56, -76)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="FlagSprite" type="Sprite2D" parent="." unique_id=937817987]
+position = Vector2(48, -136)
+texture = SubResource("AtlasTexture_kqcyk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1069981074]
+libraries/ = SubResource("AnimationLibrary_nn37d")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
