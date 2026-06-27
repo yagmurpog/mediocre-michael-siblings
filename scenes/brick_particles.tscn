@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://mb2bx1rfnovl"]
+
+[ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="1_a8oti"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
+atlas = ExtResource("1_a8oti")
+region = Rect2(180, 26, 8, 8)
+
+[node name="Brick Particles" type="CPUParticles2D" unique_id=29095599]
+emitting = false
+amount = 5
+texture = SubResource("AtlasTexture_dp3eg")
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(8, 8)
+direction = Vector2(1, 64.885)
+spread = 180.0
+gravity = Vector2(0, 600.1)
+initial_velocity_min = 177.9
+initial_velocity_max = 265.25

@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://dv3fpcbjygsce"]
+
+[ext_resource type="FontFile" uid="uid://dpkw52rdp1kk0" path="res://assets/super-mario-bros-nes.otf" id="1_55lj5"]
+
+[resource]
+font = ExtResource("1_55lj5")

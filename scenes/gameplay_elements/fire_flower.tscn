@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://71q1d4mwt0xq"]
+
+[ext_resource type="Script" uid="uid://bw2rmajkqs1pe" path="res://scripts/fire_flower.gd" id="1_2e132"]
+[ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="2_tmda7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muem4"]
+atlas = ExtResource("2_tmda7")
+region = Rect2(32, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
+atlas = ExtResource("2_tmda7")
+region = Rect2(50, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ld40"]
+atlas = ExtResource("2_tmda7")
+region = Rect2(68, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqmmt"]
+atlas = ExtResource("2_tmda7")
+region = Rect2(86, 8, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yc10j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muem4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ld40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqmmt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jscy8"]
+size = Vector2(18, 17)
+
+[sub_resource type="Animation" id="Animation_ke5i0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pl5ep"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 13), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2e132"]
+_data = {
+&"RESET": SubResource("Animation_ke5i0"),
+&"appear": SubResource("Animation_pl5ep")
+}
+
+[node name="Fire Flower" type="Node2D" unique_id=2103866506]
+z_index = -1
+script = ExtResource("1_2e132")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=562583611]
+sprite_frames = SubResource("SpriteFrames_yc10j")
+autoplay = "default"
+frame_progress = 0.14535682
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1834171640]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1631702394]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_jscy8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1855300474]
+libraries/ = SubResource("AnimationLibrary_2e132")
+autoplay = &"appear"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

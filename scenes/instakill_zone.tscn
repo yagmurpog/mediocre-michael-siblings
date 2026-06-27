@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://d2ljs575o0lq3"]
+
+[ext_resource type="Script" uid="uid://8433p458lfb3" path="res://scripts/instakill_zone.gd" id="1_y1qwt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muem4"]
+distance = -48.0
+
+[node name="Instakill Zone" type="Area2D" unique_id=530235541]
+collision_mask = 2
+script = ExtResource("1_y1qwt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=553271226]
+position = Vector2(0, 32)
+shape = SubResource("WorldBoundaryShape2D_muem4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

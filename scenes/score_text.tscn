@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://4m3nthogness"]
+
+[ext_resource type="Script" uid="uid://d0lu0r5mrh32u" path="res://scripts/score_text.gd" id="1_1x1d6"]
+[ext_resource type="FontFile" uid="uid://dpkw52rdp1kk0" path="res://assets/super-mario-bros-nes.otf" id="2_638an"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1tp6s"]
+font = ExtResource("2_638an")
+font_size = 8
+
+[sub_resource type="Animation" id="Animation_tipki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_85g3d"]
+resource_name = "default"
+length = 1.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -32)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_choun"]
+_data = {
+&"RESET": SubResource("Animation_tipki"),
+&"default": SubResource("Animation_85g3d")
+}
+
+[node name="Score Text" type="Node2D" unique_id=788352661 node_paths=PackedStringArray("label")]
+z_index = 3
+script = ExtResource("1_1x1d6")
+label = NodePath("Node2D/Label")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=2008912979]
+position = Vector2(-10, -18)
+
+[node name="Label" type="Label" parent="Node2D" unique_id=46548836]
+offset_right = 24.0
+offset_bottom = 9.0
+text = "100"
+label_settings = SubResource("LabelSettings_1tp6s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2038410921]
+libraries/ = SubResource("AnimationLibrary_choun")

@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://cnppx7s1luu35"]
+
+[ext_resource type="Texture2D" uid="uid://cptlsrm3veejf" path="res://assets/tileset.png" id="1_7eis1"]
+[ext_resource type="Script" uid="uid://bgoavy1eiif46" path="res://scripts/qblock.gd" id="1_e1c27"]
+[ext_resource type="Texture2D" uid="uid://cq5sciob5xocu" path="res://assets/tileset2.png" id="2_40dwi"]
+[ext_resource type="PackedScene" uid="uid://mb2bx1rfnovl" path="res://scenes/brick_particles.tscn" id="2_a35d5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a37o"]
+atlas = ExtResource("2_40dwi")
+region = Rect2(17, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
+atlas = ExtResource("1_7eis1")
+region = Rect2(298, 78, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
+atlas = ExtResource("1_7eis1")
+region = Rect2(315, 78, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("1_7eis1")
+region = Rect2(332, 78, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eis1"]
+atlas = ExtResource("1_7eis1")
+region = Rect2(349, 78, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8a37o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a37o")
+}],
+"loop": true,
+"name": &"brick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bvp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lquwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mycd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lquwl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eis1")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(16, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7eis1"]
+size = Vector2(16, 4)
+
+[sub_resource type="Animation" id="Animation_7eis1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+
+[sub_resource type="Animation" id="Animation_40dwi"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e1c27"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"default", &"empty"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bkxwv"]
+_data = {
+&"RESET": SubResource("Animation_7eis1"),
+&"brick_hit": SubResource("Animation_40dwi"),
+&"hit": SubResource("Animation_e1c27")
+}
+
+[node name="Qblock" type="Node2D" unique_id=2027691594]
+script = ExtResource("1_e1c27")
+brickParticles = ExtResource("2_a35d5")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1205367058]
+sprite_frames = SubResource("SpriteFrames_8a37o")
+autoplay = "default"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1110136220]
+collision_layer = 13
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1598968441]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=758319440]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1311226488]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_7eis1")
+debug_color = Color(0.8738139, 0.00045396923, 0.84143037, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2077329170]
+libraries/ = SubResource("AnimationLibrary_bkxwv")
+
+[node name="Timer" type="Timer" parent="." unique_id=2105313719]
+wait_time = 0.12
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
