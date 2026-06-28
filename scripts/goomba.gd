@@ -22,8 +22,9 @@ func _physics_process(delta: float) -> void:
 	velocity.x = SPEED*delta * direction
 	
 	move_and_slide()
+
+
 func _on_kill_zone_body_entered(body: Node2D) -> void:
-	canDie = false
 	body.take_damage()
 	
 

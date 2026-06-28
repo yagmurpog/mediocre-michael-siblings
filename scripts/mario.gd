@@ -8,8 +8,11 @@ const fireball: Resource = preload("uid://bbvkd41rgv2lb")
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var timer: Timer = $Timer
+
 @export var hud: CanvasLayer
 @export var game_manager: Node
+
 
 var default_collision_shape: RectangleShape2D
 
@@ -26,6 +29,7 @@ var facingRight = 1
 #player status
 var dead = false
 var canJump = false
+var tempInvincible = false
 var status = 0 # 0 smol, 1 big, #2 fire
 
 
@@ -79,21 +83,35 @@ func cast_fireball():
 
 
 func take_damage():
-	if status == 0 and not dead:
-		die()
-	if status == 1:
-		status = 0
-		sprite.offset.y = 0
-		collision_shape_2d.shape = default_collision_shape
-		collision_shape_2d.position.y = 1
-		position.y -= 32
+
+	if tempInvincible:
+		print("incinvle")
+	else:
+		tempInvincible = true
+		timer.start()
+
+
+		if status == 0 and not dead:
+			die()
+		if status == 1:
+			status = 0
+			sprite.offset.y = 0
+			var shap = RectangleShape2D.new()
+			shap.size = Vector2(12, 14)
+			collision_shape_2d.position.y = -8
+			collision_shape_2d.shape = shap
+			collision_shape_2d.position.y = 1
+			position.y -= 32
+		if status == 2:
+			status -= 1
 
 func die():
 	status = 0
 	dead = true
 	play_animation("die")
 	animation_player.play("die")
-	print("murder")
+	await get_tree().create_timer(2.0).timeout
+	get_tree().reload_current_scene()
 		
 func get_big():
 	if status < 2:
@@ -214,3 +232,7 @@ func add_score(amount, text):
 	game_manager.increase_score(amount)
 	
 
+
+
+func _on_timer_timeout() -> void:
+	tempInvincible = false
