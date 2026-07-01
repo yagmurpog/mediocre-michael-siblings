@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0pbbtmyf86cp" path="res://scripts/fireball.gd" id="1_1gl40"]
 [ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="2_cb14k"]
+[ext_resource type="AudioStream" uid="uid://godjday8otls" path="res://assets/sound/sfx/fireball.wav" id="3_cb14k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_muem4"]
 friction = 0.0
@@ -38,7 +39,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gqmmt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 20.0
 }]
@@ -72,6 +73,11 @@ shape = SubResource("RectangleShape2D_dp3eg")
 [node name="Timer" type="Timer" parent="." unique_id=694264500]
 wait_time = 5.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1187979180]
+stream = ExtResource("3_cb14k")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

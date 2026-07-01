@@ -12,7 +12,7 @@ config_version=5
 
 config/name="my great original video game"
 run/main_scene="uid://douhgajvhi2sn"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.0793, 0.083524995, 0.13, 1)
 config/icon="res://icon.svg"

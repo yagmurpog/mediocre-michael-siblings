@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cuc1njih0bj7h" path="res://scripts/coin.gd" id="1_0t63x"]
 [ext_resource type="Texture2D" uid="uid://cptlsrm3veejf" path="res://assets/tileset.png" id="1_d5gmh"]
 [ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="2_11l1o"]
+[ext_resource type="AudioStream" uid="uid://buohkewn5hx3k" path="res://assets/sound/sfx/coin.wav" id="4_ikash"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d14el"]
 atlas = ExtResource("2_11l1o")
@@ -47,7 +48,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jig8b")
 }],
-"loop": true,
+"loop": 1,
 "name": &"block",
 "speed": 7.0
 }, {
@@ -73,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h2yge")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -148,5 +149,9 @@ shape = SubResource("RectangleShape2D_v7riw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1090069235]
 libraries/ = SubResource("AnimationLibrary_jsmju")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1753583154]
+stream = ExtResource("4_ikash")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

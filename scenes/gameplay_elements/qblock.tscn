@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cptlsrm3veejf" path="res://assets/tileset.png" id="1_7eis1"]
 [ext_resource type="Script" uid="uid://bgoavy1eiif46" path="res://scripts/qblock.gd" id="1_e1c27"]
 [ext_resource type="Texture2D" uid="uid://cq5sciob5xocu" path="res://assets/tileset2.png" id="2_40dwi"]
-[ext_resource type="PackedScene" uid="uid://mb2bx1rfnovl" path="res://scenes/brick_particles.tscn" id="2_a35d5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a37o"]
 atlas = ExtResource("2_40dwi")
@@ -31,7 +30,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8a37o")
 }],
-"loop": true,
+"loop": 1,
 "name": &"brick",
 "speed": 5.0
 }, {
@@ -48,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lquwl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -56,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7eis1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"empty",
 "speed": 5.0
 }]
@@ -145,7 +144,6 @@ _data = {
 
 [node name="Qblock" type="Node2D" unique_id=2027691594]
 script = ExtResource("1_e1c27")
-brickParticles = ExtResource("2_a35d5")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1205367058]
 sprite_frames = SubResource("SpriteFrames_8a37o")
@@ -172,6 +170,9 @@ libraries/ = SubResource("AnimationLibrary_bkxwv")
 
 [node name="Timer" type="Timer" parent="." unique_id=2105313719]
 wait_time = 0.12
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=791895311]
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -7,14 +7,23 @@ var isMoving = false
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_down: RayCast2D = $RayCastDown
+@onready var sprite: Sprite2D = $Sprite
 
-func _init() -> void:
+@export var isOneUp: bool = false
+@export var oneUp: Texture
+
+const common = preload("res://scripts/library.gd")
+
+func _ready() -> void:
+	if isOneUp:
+		sprite.texture = oneUp
 	print("mushromd")
 
 func startMoving():
 	isMoving = true
 
 func _physics_process(delta: float) -> void:
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if ray_cast_right.is_colliding():
@@ -31,5 +40,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	body.get_big() # Replace with function body.
+	if isOneUp:
+		common.play_audio(self,preload("res://assets/sound/sfx/1up.wav"))
+	else:
+		body.get_big()
+	
 	queue_free()

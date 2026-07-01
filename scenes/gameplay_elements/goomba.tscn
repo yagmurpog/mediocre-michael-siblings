@@ -27,7 +27,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1bvp3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -35,13 +35,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jke6y")
 }],
-"loop": true,
+"loop": 1,
 "name": &"stomp",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwfim"]
-size = Vector2(6, 5)
+size = Vector2(8, 5)
 
 [sub_resource type="Animation" id="Animation_lwfim"]
 length = 0.001
@@ -150,8 +150,6 @@ collision_layer = 5
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1086760270]
-visible = false
-position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_jke6y")
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=781196283]
@@ -170,6 +168,9 @@ debug_color = Color(0.9532129, 2.0214916e-06, 0.55719656, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2050804245]
 libraries/ = SubResource("AnimationLibrary_508bv")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=516708163]
+bus = &"SFX"
 
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
 [connection signal="body_entered" from="StompZone" to="." method="_on_stomp_zone_body_entered"]

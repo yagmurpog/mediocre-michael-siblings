@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://chbiph0wbgjyr" path="res://scenes/mario.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/game_manager.gd" id="1_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="2_0ld40"]
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cq5sciob5xocu" path="res://assets/tileset2.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cnppx7s1luu35" path="res://scenes/gameplay_elements/qblock.tscn" id="3_1bvp3"]
@@ -16,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="15_jbj1t"]
 [ext_resource type="FontFile" uid="uid://dpkw52rdp1kk0" path="res://assets/super-mario-bros-nes.otf" id="15_jkv2x"]
 [ext_resource type="Script" uid="uid://cqfe540j3ic8s" path="res://scripts/demo_text.gd" id="15_muem4"]
+[ext_resource type="Script" uid="uid://l2hg6saucy48" path="res://scripts/koopa_troopa.gd" id="17_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://bofht3w876lfq" path="res://assets/enemies.png" id="17_muem4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
 texture = ExtResource("2_lquwl")
@@ -2870,7 +2873,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jkv2x")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -2988,6 +2991,49 @@ _data = {
 &"new_animation": SubResource("Animation_0ld40")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
+atlas = ExtResource("17_muem4")
+region = Rect2(0, 112, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ld40"]
+atlas = ExtResource("17_muem4")
+region = Rect2(18, 112, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqmmt"]
+atlas = ExtResource("17_muem4")
+region = Rect2(72, 120, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqmmt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ld40")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqmmt")
+}],
+"loop": 1,
+"name": &"shell",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muem4"]
+size = Vector2(14, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3eg"]
+size = Vector2(14, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ld40"]
+size = Vector2(16, 10)
+
 [node name="Game" type="Node2D" unique_id=1805487705]
 
 [node name="GameManager" type="Node" parent="." unique_id=550196803 node_paths=PackedStringArray("hud", "mario")]
@@ -2999,6 +3045,15 @@ levelTime = 300
 
 [node name="LevelTimer" type="Timer" parent="GameManager" unique_id=397904098]
 autostart = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="GameManager" unique_id=401832855]
+stream = ExtResource("2_0ld40")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Fire Flower" parent="GameManager" unique_id=2103866506 instance=ExtResource("10_jkv2x")]
+position = Vector2(-402, 6)
 
 [node name="mario" parent="." unique_id=1038047173 node_paths=PackedStringArray("hud", "game_manager") instance=ExtResource("1_ig7tw")]
 position = Vector2(-428, -5)
@@ -3027,10 +3082,10 @@ layer_2/tile_data = PackedInt32Array(65524, 2818048, 2, -11, 2883584, 2, 65525, 
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=369530213]
 z_index = -2
-offset_left = -3627.9998
-offset_top = -2198.0
-offset_right = -853.99976
-offset_bottom = -892.0
+offset_left = -3629.0
+offset_top = -2198.0002
+offset_right = -855.0
+offset_bottom = -892.00024
 scale = Vector2(4.129857, 3.640728)
 color = Color(0.36078432, 0.5803922, 0.9882353, 1)
 
@@ -3426,4 +3481,56 @@ vertical_alignment = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Demo Text" unique_id=93555367]
 libraries/ = SubResource("AnimationLibrary_gqmmt")
 
+[node name="Koopa Troopa" type="CharacterBody2D" parent="." unique_id=1772451202]
+position = Vector2(-360, 3)
+collision_mask = 17
+script = ExtResource("17_dp3eg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Koopa Troopa" unique_id=1967807252]
+sprite_frames = SubResource("SpriteFrames_gqmmt")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa Troopa" unique_id=2105225328]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_muem4")
+
+[node name="RayCastLeft" type="RayCast2D" parent="Koopa Troopa" unique_id=1651926230]
+position = Vector2(-4, 4)
+target_position = Vector2(-13, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="Koopa Troopa" unique_id=858116485]
+position = Vector2(3, 4)
+target_position = Vector2(13, 0)
+
+[node name="StompZone" type="Area2D" parent="Koopa Troopa" unique_id=488779571]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa Troopa/StompZone" unique_id=582967049]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_dp3eg")
+debug_color = Color(0.9532129, 2.0214916e-06, 0.55719656, 0.41960785)
+
+[node name="KillZone" type="Area2D" parent="Koopa Troopa" unique_id=662079762]
+collision_layer = 5
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa Troopa/KillZone" unique_id=1234535178]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_0ld40")
+
+[node name="Coin" parent="." unique_id=363327805 instance=ExtResource("3_h2yge")]
+position = Vector2(-499, -7)
+
+[node name="Coin2" parent="." unique_id=2027941307 instance=ExtResource("3_h2yge")]
+position = Vector2(-481, -12)
+
+[node name="Coin3" parent="." unique_id=1347499062 instance=ExtResource("3_h2yge")]
+position = Vector2(-463, -8)
+
+[node name="Mushroom" parent="." unique_id=757329721 instance=ExtResource("6_7mycd")]
+position = Vector2(-509, 9)
+isOneUp = true
+
 [connection signal="timeout" from="GameManager/LevelTimer" to="GameManager" method="_on_level_timer_timeout"]
+[connection signal="body_entered" from="Koopa Troopa/StompZone" to="Koopa Troopa" method="_on_stomp_zone_body_entered"]
+[connection signal="body_entered" from="Koopa Troopa/KillZone" to="Koopa Troopa" method="_on_kill_zone_body_entered"]

@@ -5,10 +5,15 @@ const score_text_template: Resource = preload("uid://4m3nthogness")
 const fireball: Resource = preload("uid://bbvkd41rgv2lb")
 
 
+const JUMP_SFX = preload("res://assets/sound/sfx/jump.wav")
+
+const common = preload("res://scripts/library.gd")
+
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var timer: Timer = $Timer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @export var hud: CanvasLayer
 @export var game_manager: Node
@@ -31,6 +36,7 @@ var dead = false
 var canJump = false
 var tempInvincible = false
 var status = 0 # 0 smol, 1 big, #2 fire
+var suspendAnimations = false
 
 
 # level end stuff
@@ -110,19 +116,35 @@ func die():
 	dead = true
 	play_animation("die")
 	animation_player.play("die")
-	await get_tree().create_timer(2.0).timeout
+
+	audio_stream_player.stream = preload("res://assets/sound/sfx/death.wav")
+	audio_stream_player.play()
+
+	await common.wait(self,2.8)
 	get_tree().reload_current_scene()
 		
 func get_big():
+	add_score(1000, "lmao")
+
 	if status < 2:
 		status = 1
+	else:
+		return
 	var shap = RectangleShape2D.new()
 	shap.size = Vector2(12, 30)
 	collision_shape_2d.position.y = -8
 	collision_shape_2d.shape = shap
 	
+	common.play_audio(self, preload("res://assets/sound/sfx/powerup.wav"))
+	
+
 	sprite.offset.y = -8
-	add_score(1000, "lmao")
+
+	sprite.play("get_big")
+	suspendAnimations = true
+	await common.wait(self, 0.5)
+	suspendAnimations = false
+	
 	
 
 func fire_up():
@@ -132,58 +154,66 @@ func fire_up():
 	add_score(1000, "lmao")
 	
 	
-func goomba_stomp():
-	velocity.y -= 400
+func goomba_stomp(vel):
+	velocity.y = -vel
 	add_score(100, "smoked")
 
 # very jank
 func play_animation(animationName):
-	match status:
-		0: #small
-			match animationName:
-				"idle":
-					sprite.play("idle")
-				"run":
-					sprite.play("run")
-				"die":
-					sprite.play("die")
-				"get_big":
-					sprite.play("get_big")
-				"turn_around":
-					sprite.play("turn_around")
-				"jump":
-					sprite.play("jump")
-				"hold":
-					sprite.play("hold")
+	if not suspendAnimations:
+		match status:
+			0: #small
+				match animationName:
+					"idle":
+						sprite.play("idle")
+					"run":
+						sprite.play("run")
+					"die":
+						sprite.play("die")
+					"get_big":
+						sprite.play("get_big")
+					"turn_around":
+						sprite.play("turn_around")
+					"jump":
+						sprite.play("jump")
+					"hold":
+						sprite.play("hold")
 
-		1: #big
-			match animationName:
-				"idle":
-					sprite.play("big_idle")
-				"run":
-					sprite.play("big_run")
-				"turn_around":
-					sprite.play("big_turn_around")
-				"jump":
-					sprite.play("big_jump")
-				"hold":
-					sprite.play("big_hold")
-		2: #fire
-			match animationName:
-				"idle":
-					sprite.play("fire_idle")
-				"run":
-					sprite.play("fire_run")
-				"turn_around":
-					sprite.play("fire_turn_around")
-				"jump":
-					sprite.play("fire_jump")
-				"hold":
-					sprite.play("fire_hold")
-		
+			1: #big
+				match animationName:
+					"idle":
+						sprite.play("big_idle")
+					"run":
+						sprite.play("big_run")
+					"turn_around":
+						sprite.play("big_turn_around")
+					"jump":
+						sprite.play("big_jump")
+					"hold":
+						sprite.play("big_hold")
+			2: #fire
+				match animationName:
+					"idle":
+						sprite.play("fire_idle")
+					"run":
+						sprite.play("fire_run")
+					"turn_around":
+						sprite.play("fire_turn_around")
+					"jump":
+						sprite.play("fire_jump")
+					"hold":
+						sprite.play("fire_hold")
+
+func play_audio(sound_name):
+	match sound_name:
+		"jump":
+			audio_stream_player.stream = JUMP_SFX
+	audio_stream_player.play()
+	
 func jump(delta):
 		if Input.is_action_pressed("jump") and is_on_floor():
 			velocity.y -= 21000 * delta
+			play_audio("jump")
 				
 
 func move(delta):

@@ -6,6 +6,8 @@ const SPEED = 1500
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 
 var canDie = true
 var direction = 1
@@ -25,16 +27,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
-	body.take_damage()
+	if canDie:
+		body.take_damage()
 	
 
 func _on_stomp_zone_body_entered(body: Node2D) -> void:
 	if canDie:
-		body.goomba_stomp()
+		audio_stream_player.stream = preload("res://assets/sound/sfx/stompswim.wav")
+		audio_stream_player.play()
+		body.goomba_stomp(400)
 		animation_player.play("stomp")
 
 func fire_die():
 	if canDie:
+		audio_stream_player.stream = preload("res://assets/sound/sfx/kickkill.wav")
+		audio_stream_player.play()
 		animation_player.play("fire_die")
 		velocity.y -= 200
 		sprite.scale *= -1
