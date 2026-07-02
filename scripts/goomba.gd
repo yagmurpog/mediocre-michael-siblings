@@ -9,8 +9,13 @@ const SPEED = 1500
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
+const common = preload("res://scripts/library.gd")
+
 var canDie = true
 var direction = 1
+
+func _ready() -> void:
+	play_animation("default")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -33,17 +38,30 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 
 func _on_stomp_zone_body_entered(body: Node2D) -> void:
 	if canDie:
-		audio_stream_player.stream = preload("res://assets/sound/sfx/stompswim.wav")
-		audio_stream_player.play()
+		common.play_audio(self,preload("res://assets/sound/sfx/stompswim.wav"))
 		body.goomba_stomp(400)
 		animation_player.play("stomp")
 
 func fire_die():
 	if canDie:
-		audio_stream_player.stream = preload("res://assets/sound/sfx/kickkill.wav")
-		audio_stream_player.play()
-		animation_player.play("fire_die")
+		common.play_audio(self,preload("res://assets/sound/sfx/kickkill.wav"))
 		velocity.y -= 200
 		sprite.scale *= -1
 		collision_shape_2d.set_deferred("disabled",true)
 		canDie = false
+
+
+func play_animation(anim):
+	match anim:
+		"default":
+			match get_node("/root/Level").level_theme:
+				common.theme.GROUND:
+					sprite.play("default")
+				common.theme.UNDERGROUND:
+					sprite.play("default_underground")
+		"stomp":
+			match get_node("/root/Level").level_theme:
+				common.theme.GROUND:
+					sprite.play("stomp")
+				common.theme.UNDERGROUND:
+					sprite.play("stomp_underground")		

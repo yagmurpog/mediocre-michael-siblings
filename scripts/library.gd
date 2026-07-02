@@ -1,6 +1,8 @@
 
 extends Object
 
+enum theme {GROUND,UNDERGROUND,UNDERWATER,CASTLE}
+
 static func play_audio(caller: Node, res: Resource):
   var audio_stream = AudioStreamPlayer.new()
   audio_stream.stream = res				

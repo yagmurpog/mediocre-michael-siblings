@@ -8,12 +8,12 @@ const brickParticles: Resource = preload("uid://mb2bx1rfnovl")
 
 
 
-@onready var game_manager: Node = %GameManager
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
 @onready var collision_shape_2d: CollisionShape2D = $StaticBody2D/CollisionShape2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var hit_zone: Area2D = $HitZone
 
 const common = preload("res://scripts/library.gd")
 
@@ -21,9 +21,8 @@ const common = preload("res://scripts/library.gd")
 var isHit = false
 
 func _ready() -> void:
-	
+	setAnimation()
 	if isBrick:
-		sprite.play("brick")
 		if not itemInside:
 			audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
 	if isInvinsible:
@@ -33,19 +32,30 @@ func _ready() -> void:
 		audio_stream_player.stream = preload("res://assets/sound/sfx/item.wav")
 	
 
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if not isHit:
 		if isInvinsible:
 			sprite.show()
 			collision_shape_2d.set_deferred("disabled",false)
 		
+		for stuff_above in hit_zone.get_overlapping_bodies():
+			
+			print(stuff_above.name)
+			if stuff_above.get_collision_layer() == (1 << 4) | (1 << 0):
+				print("yup	")
+				stuff_above.fire_die()
+			else:
+				stuff_above.velocity.y -= 150
+
 		if itemInside:
 			
 			var thing = itemInside.instantiate()
 			
 			if thing.name == "Coin":
 				thing.isSpawnedByBlock = true
-				game_manager.increase_coin(1,self)
+				body.increase_coin(1,self)
 				audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
 			
 			add_sibling(thing)
@@ -77,3 +87,27 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	queue_free()
 	pass
+
+
+func setAnimation():
+	if isBrick:
+		match get_node("/root/Level").level_theme:
+			common.theme.GROUND:
+				sprite.play("brick")
+			common.theme.UNDERGROUND:
+				sprite.play("brick_underground")
+
+	else:
+		match get_node("/root/Level").level_theme:
+			common.theme.GROUND:
+				sprite.play("default")
+			common.theme.UNDERGROUND:
+				sprite.play("default_underground")
+
+
+func drain():
+	match get_node("/root/Level").level_theme:
+			common.theme.GROUND:
+				sprite.play("empty")
+			common.theme.UNDERGROUND:
+				sprite.play("empty_underground")

@@ -16,7 +16,6 @@ const common = preload("res://scripts/library.gd")
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @export var hud: CanvasLayer
-@export var game_manager: Node
 
 
 var default_collision_shape: RectangleShape2D
@@ -37,6 +36,12 @@ var canJump = false
 var tempInvincible = false
 var status = 0 # 0 smol, 1 big, #2 fire
 var suspendAnimations = false
+var coins = 0
+var score = 0
+@export var lives = 3
+
+# level stuff
+@export var currentLevel = 0
 
 
 # level end stuff
@@ -44,11 +49,16 @@ var levelFinish: bool = false
 var flagpoleEndReached: bool = false
 var stopZoneReached: bool = false
 
+var jump_modifier: float
+
 
 func _physics_process(delta: float) -> void:
 	if not dead:
 		if (not is_on_floor() and not levelFinish):
-			velocity += get_gravity() * delta
+
+			jump_modifier = 0.5 if Input.is_action_pressed("jump") and isJumping else 1.0
+
+			velocity += get_gravity() * delta * jump_modifier
 			
 			
 		if levelFinish:
@@ -89,7 +99,6 @@ func cast_fireball():
 
 
 func take_damage():
-
 	if tempInvincible:
 		print("incinvle")
 	else:
@@ -120,7 +129,8 @@ func die():
 	audio_stream_player.stream = preload("res://assets/sound/sfx/death.wav")
 	audio_stream_player.play()
 
-	await common.wait(self,2.8)
+	lives -= 1
+	await common.wait(self, 2.8)
 	get_tree().reload_current_scene()
 		
 func get_big():
@@ -146,7 +156,6 @@ func get_big():
 	suspendAnimations = false
 	
 	
-
 func fire_up():
 	if status == 0:
 		get_big()
@@ -155,14 +164,14 @@ func fire_up():
 	
 	
 func goomba_stomp(vel):
-	velocity.y = -vel
+	velocity.y = - vel
 	add_score(100, "smoked")
 
 # very jank
 func play_animation(animationName):
 	if not suspendAnimations:
 		match status:
-			0: #small
+			0: # small
 				match animationName:
 					"idle":
 						sprite.play("idle")
@@ -179,7 +188,7 @@ func play_animation(animationName):
 					"hold":
 						sprite.play("hold")
 
-			1: #big
+			1: # big
 				match animationName:
 					"idle":
 						sprite.play("big_idle")
@@ -191,7 +200,7 @@ func play_animation(animationName):
 						sprite.play("big_jump")
 					"hold":
 						sprite.play("big_hold")
-			2: #fire
+			2: # fire
 				match animationName:
 					"idle":
 						sprite.play("fire_idle")
@@ -210,11 +219,21 @@ func play_audio(sound_name):
 			audio_stream_player.stream = JUMP_SFX
 	audio_stream_player.play()
 	
+
+var isJumping = false
+
+
 func jump(delta):
-		if Input.is_action_pressed("jump") and is_on_floor():
-			velocity.y -= 21000 * delta
-			play_audio("jump")
-				
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y -= 15000 * delta
+		isJumping = true
+		common.play_audio(self,preload("res://assets/sound/sfx/jump.wav"))
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("jump"):
+		isJumping = false
+
 
 func move(delta):
 		var direction := Input.get_axis("left", "right")
@@ -259,10 +278,22 @@ func add_score(amount, text):
 	score_text.text = text
 	score_text.position = position
 	add_sibling(score_text)
-	game_manager.increase_score(amount)
+	increase_score(amount)
 	
+func increase_score(amount):
+	score += amount
+	hud.update_score(str(score))
 
-
+func increase_coin(amount, caller):
+	var score_text = score_text_template.instantiate()
+	score_text.text = "300"
+	score_text.position = caller.position
+	add_sibling(score_text)
+	coins += amount
+	
+	hud.update_coin(str(coins))
+	increase_score(300)
+	
 
 func _on_timer_timeout() -> void:
 	tempInvincible = false

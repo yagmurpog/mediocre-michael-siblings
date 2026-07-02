@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://ceur32oih8l8o"]
+
+[ext_resource type="Script" uid="uid://l2hg6saucy48" path="res://scripts/koopa_troopa.gd" id="1_k01d8"]
+[ext_resource type="Texture2D" uid="uid://bofht3w876lfq" path="res://assets/enemies.png" id="2_h752x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp3eg"]
+atlas = ExtResource("2_h752x")
+region = Rect2(0, 112, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ld40"]
+atlas = ExtResource("2_h752x")
+region = Rect2(18, 112, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqmmt"]
+atlas = ExtResource("2_h752x")
+region = Rect2(72, 120, 16, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqmmt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp3eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ld40")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqmmt")
+}],
+"loop": 1,
+"name": &"shell",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muem4"]
+size = Vector2(14, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3eg"]
+size = Vector2(5, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ld40"]
+size = Vector2(16, 10)
+
+[node name="Koopa Troopa" type="CharacterBody2D" unique_id=2120533170]
+collision_layer = 0
+collision_mask = 17
+script = ExtResource("1_k01d8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=671712888]
+sprite_frames = SubResource("SpriteFrames_gqmmt")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1203796193]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_muem4")
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=95406630]
+position = Vector2(-4, 4)
+target_position = Vector2(-13, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1146548286]
+position = Vector2(3, 4)
+target_position = Vector2(13, 0)
+
+[node name="StompZone" type="Area2D" parent="." unique_id=717807815]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompZone" unique_id=651684287]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_dp3eg")
+debug_color = Color(0.9532129, 2.0214916e-06, 0.55719656, 0.41960785)
+
+[node name="KillZone" type="Area2D" parent="." unique_id=52168677]
+collision_layer = 5
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=105541367]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_0ld40")
+
+[connection signal="body_entered" from="StompZone" to="." method="_on_stomp_zone_body_entered"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]

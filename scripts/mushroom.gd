@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 1200
+const SPEED = 1800
 var direction = 1
 var isMoving = false
 

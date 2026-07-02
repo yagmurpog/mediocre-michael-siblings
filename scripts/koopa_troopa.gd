@@ -12,22 +12,26 @@ var canDie = true
 var direction = 1
 var shellOnly = false
 var shellMoving = false
-var shellMultiplier = 1
+var shellSpeedMultiplier = 1
 
+const common = preload("res://scripts/library.gd")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
-
-
 	if ray_cast_right.is_colliding():
 		direction = -1
 
 	if ray_cast_left.is_colliding():
-		direction = 1	
-	
-	velocity.x = SPEED*delta * direction
+		direction = 1
+		
+	if direction > 0:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+
+	velocity.x = SPEED*delta * direction * shellSpeedMultiplier
 	
 		
 	move_and_slide()
@@ -35,22 +39,34 @@ func _physics_process(delta: float) -> void:
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if (shellMoving and shellOnly) or not shellOnly:
-		#body.take_damage()
+		body.take_damage()
 		pass
 	else:
+		common.play_audio(self,preload("res://assets/sound/sfx/kickkill.wav"))
 		direction = sign(body.velocity.x)
 		shellMoving = true
-		shellMultiplier = 3
+		shellSpeedMultiplier = 5
 		
 		
 	
 
 func _on_stomp_zone_body_entered(body: Node2D) -> void:
 	print("hi :)")
-	if canDie:
+	if canDie and not shellMoving:
+		direction = 0
 		body.goomba_stomp(300)
 		shellOnly = true
+		
 		sprite.play("shell")
+		collision_shape_2d.position.y = 1.5
+
+		common.play_audio(self,preload("res://assets/sound/sfx/stompswim.wav"))
+
+	if shellMoving and shellOnly:
+		common.play_audio(self,preload("res://assets/sound/sfx/kickkill.wav"))
+		direction = 0
+		shellMoving = false
+		body.goomba_stomp(300)
 		
 
 func fire_die():
