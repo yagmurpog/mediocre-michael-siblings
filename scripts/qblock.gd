@@ -11,7 +11,7 @@ const brickParticles: Resource = preload("uid://mb2bx1rfnovl")
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
-@onready var collision_shape_2d: CollisionShape2D = $StaticBody2D/CollisionShape2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var hit_zone: Area2D = $HitZone
 
@@ -36,54 +36,59 @@ func _ready() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if not isHit:
-		if isInvinsible:
-			sprite.show()
-			collision_shape_2d.set_deferred("disabled",false)
-		
-		for stuff_above in hit_zone.get_overlapping_bodies():
-			
-			print(stuff_above.name)
-			if stuff_above.get_collision_layer() == (1 << 4) | (1 << 0):
-				print("yup	")
-				stuff_above.fire_die()
-			else:
-				stuff_above.velocity.y -= 150
-
-		if itemInside:
-			
-			var thing = itemInside.instantiate()
-			
-			if thing.name == "Coin":
-				thing.isSpawnedByBlock = true
-				body.increase_coin(1,self)
-				audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
-			
-			add_sibling(thing)
-			thing.position = global_position
-			thing.position.y -= 16
-			isHit = true
-		
-			animation_player.play("hit")
-			audio_stream_player.play()
-
-		if not itemInside and isBrick:
-			audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
-			animation_player.play("brick_hit")
-			if body.status > 0:
-				audio_stream_player.stream = preload("res://assets/sound/sfx/brick.wav")
-
-
-				timer.start()
-				common.play_audio(self,preload("res://assets/sound/sfx/brick.wav"))
-			
-				var brickParticle = brickParticles.instantiate()
-				brickParticle.emitting = true
-				add_sibling(brickParticle)
-				brickParticle.position = global_position
-			audio_stream_player.play()
+		hit(body)
 	else:
 		common.play_audio(self,preload("res://assets/sound/sfx/bump.wav"))
 		
+
+func hit(body):
+	if isInvinsible:
+		sprite.show()
+		collision_shape_2d.set_deferred("disabled",false)
+		
+	for stuff_above in hit_zone.get_overlapping_bodies():
+			
+		print(stuff_above.name)
+		if stuff_above.get_collision_layer() == (1 << 4) | (1 << 0):
+			print("yup	")
+			stuff_above.fire_die()
+		else:
+			stuff_above.velocity.y -= 150
+
+	if itemInside:
+			
+		var thing = itemInside.instantiate()
+			
+		if thing.name == "Coin":
+			thing.isSpawnedByBlock = true
+			body.increase_coin(1,self)
+			audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
+			
+		add_sibling(thing)
+		thing.position = global_position
+		thing.position.y -= 16
+		isHit = true
+		
+		animation_player.play("hit")
+		audio_stream_player.play()
+
+	if not itemInside and isBrick:
+		audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
+		animation_player.play("brick_hit")
+		if body.status > 0:
+			audio_stream_player.stream = preload("res://assets/sound/sfx/brick.wav")
+
+
+			timer.start()
+			common.play_audio(self,preload("res://assets/sound/sfx/brick.wav"))
+			
+			var brickParticle = brickParticles.instantiate()
+			brickParticle.emitting = true
+			add_sibling(brickParticle)
+			brickParticle.position = global_position
+		audio_stream_player.play()
+
+
 func _on_timer_timeout() -> void:
 	queue_free()
 	pass
@@ -91,14 +96,14 @@ func _on_timer_timeout() -> void:
 
 func setAnimation():
 	if isBrick:
-		match get_node("/root/Level").level_theme:
+		match common.get_theme(self):
 			common.theme.GROUND:
 				sprite.play("brick")
 			common.theme.UNDERGROUND:
 				sprite.play("brick_underground")
 
 	else:
-		match get_node("/root/Level").level_theme:
+		match common.get_theme(self):
 			common.theme.GROUND:
 				sprite.play("default")
 			common.theme.UNDERGROUND:
@@ -106,8 +111,12 @@ func setAnimation():
 
 
 func drain():
-	match get_node("/root/Level").level_theme:
+	match common.get_theme(self):
 			common.theme.GROUND:
 				sprite.play("empty")
 			common.theme.UNDERGROUND:
 				sprite.play("empty_underground")
+
+
+func _on_shell_bump_zone_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

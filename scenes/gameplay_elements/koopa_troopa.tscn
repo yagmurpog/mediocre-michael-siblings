@@ -76,8 +76,8 @@ shape = SubResource("RectangleShape2D_dp3eg")
 debug_color = Color(0.9532129, 2.0214916e-06, 0.55719656, 0.41960785)
 
 [node name="KillZone" type="Area2D" parent="." unique_id=52168677]
-collision_layer = 5
-collision_mask = 2
+collision_layer = 133
+collision_mask = 82
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=105541367]
 position = Vector2(0, 7)

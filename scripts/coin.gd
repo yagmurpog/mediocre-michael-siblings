@@ -26,7 +26,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func setAnimation():
-	match get_node("/root/Level").level_theme:
+	match common.get_theme(self):
 		common.theme.GROUND:
 			animated_sprite_2d.play("default")
 		common.theme.UNDERGROUND:

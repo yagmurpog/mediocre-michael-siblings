@@ -38,14 +38,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
-	if (shellMoving and shellOnly) or not shellOnly:
-		body.take_damage()
-		pass
-	else:
-		common.play_audio(self,preload("res://assets/sound/sfx/kickkill.wav"))
-		direction = sign(body.velocity.x)
-		shellMoving = true
-		shellSpeedMultiplier = 5
+	for body2 in $KillZone.get_overlapping_bodies():
+		print(body2.get_collision_layer)
+		if body2.get_collision_layer() == (1 << 1):
+			if (shellMoving and shellOnly) or not shellOnly:
+				body.take_damage()
+					
+			else:
+				common.play_audio(self,preload("res://assets/sound/sfx/kickkill.wav"))
+				direction = sign(body.velocity.x)
+				shellMoving = true
+				shellSpeedMultiplier = 5
+
+		if body2.get_collision_layer() == (1 << 4):
+			body2.fire_die()
+			print("yup")
 		
 		
 	

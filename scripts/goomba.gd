@@ -51,16 +51,17 @@ func fire_die():
 		canDie = false
 
 
+
 func play_animation(anim):
 	match anim:
 		"default":
-			match get_node("/root/Level").level_theme:
+			match common.get_theme(self):
 				common.theme.GROUND:
 					sprite.play("default")
 				common.theme.UNDERGROUND:
 					sprite.play("default_underground")
 		"stomp":
-			match get_node("/root/Level").level_theme:
+			match common.get_theme(self):
 				common.theme.GROUND:
 					sprite.play("stomp")
 				common.theme.UNDERGROUND:

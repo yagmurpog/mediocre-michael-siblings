@@ -12,3 +12,6 @@ static func play_audio(caller: Node, res: Resource):
 
 static func wait(caller: Node, time:float):
    return caller.get_tree().create_timer(time).timeout
+
+static func get_theme(caller: Node):
+  return caller.get_node("/root/LevelBase").loaded_level_theme

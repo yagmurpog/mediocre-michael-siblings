@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bgoavy1eiif46" path="res://scripts/qblock.gd" id="1_e1c27"]
 [ext_resource type="Texture2D" uid="uid://cq5sciob5xocu" path="res://assets/tileset2.png" id="2_40dwi"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(16, 15)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a37o"]
 atlas = ExtResource("2_40dwi")
 region = Rect2(17, 0, 16, 16)
@@ -113,9 +116,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(16, 15)
-
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_u3p6w"]
 length = 8.0
 
@@ -212,20 +212,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkv2x"]
 size = Vector2(12, 12)
 
-[node name="Qblock" type="Node2D" unique_id=2027691594]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
+size = Vector2(23, 14)
+
+[node name="Qblock" type="StaticBody2D" unique_id=929953790]
+collision_layer = 77
+collision_mask = 2
 script = ExtResource("1_e1c27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1598968441]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1205367058]
 sprite_frames = SubResource("SpriteFrames_8a37o")
 autoplay = "default"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1110136220]
-collision_layer = 13
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1598968441]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=758319440]
 collision_mask = 2
@@ -252,5 +253,14 @@ collision_mask = 50
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_jkv2x")
 
+[node name="ShellBumpZone" type="Area2D" parent="." unique_id=788509463]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShellBumpZone" unique_id=502293577]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_yl3ha")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="ShellBumpZone" to="." method="_on_shell_bump_zone_body_entered"]

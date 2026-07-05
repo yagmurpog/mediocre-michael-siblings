@@ -10,3 +10,4 @@
 - make a pause menu
 - add lives
 - add level start screens
+- re organize collision layers

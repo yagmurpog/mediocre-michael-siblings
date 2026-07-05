@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://c8n5kb6a28qlq"]
 
 [ext_resource type="PackedScene" uid="uid://chbiph0wbgjyr" path="res://scenes/mario.tscn" id="1_58o6h"]
+[ext_resource type="Script" uid="uid://82q32yctu68q" path="res://scripts/game_manager.gd" id="1_krm4r"]
 [ext_resource type="Script" uid="uid://cgkl2aogyedhm" path="res://scripts/hud_manager.gd" id="2_8rhjg"]
+[ext_resource type="PackedScene" uid="uid://ihy3wfi5vtl6" path="res://scenes/levels/1-2.tscn" id="2_krm4r"]
 [ext_resource type="LabelSettings" uid="uid://dv3fpcbjygsce" path="res://assets/label_settings.tres" id="3_krm4r"]
 [ext_resource type="Texture2D" uid="uid://dlw6miyw2j123" path="res://assets/coins.png" id="4_8n3nq"]
 
@@ -38,8 +40,11 @@ animations = [{
 }]
 
 [node name="LevelBase" type="Node2D" unique_id=1169482387]
+script = ExtResource("1_krm4r")
+first_level = ExtResource("2_krm4r")
 
 [node name="mario" parent="." unique_id=1038047173 node_paths=PackedStringArray("hud") instance=ExtResource("1_58o6h")]
+unique_name_in_owner = true
 position = Vector2(-428, -5)
 hud = NodePath("../HUD")
 accel = 110
@@ -60,19 +65,17 @@ score_label = NodePath("Control/PlayerLabel/ScoreLabel")
 
 [node name="Control" type="Control" parent="HUD" unique_id=1214361262]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayerLabel" type="Label" parent="HUD/Control" unique_id=134356489]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 64.0
-offset_right = 225.0
-offset_bottom = 87.0
+offset_left = -480.0
+offset_top = 32.0
+offset_right = -224.0
+offset_bottom = 55.0
 text = "PLAYER NAME HERE"
 label_settings = ExtResource("3_krm4r")
 horizontal_alignment = 1
@@ -80,8 +83,9 @@ vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="HUD/Control/PlayerLabel" unique_id=1851150633]
 layout_mode = 0
+offset_left = 48.0
 offset_top = 24.0
-offset_right = 153.0
+offset_right = 201.0
 offset_bottom = 47.0
 text = "SCORE"
 label_settings = ExtResource("3_krm4r")
@@ -90,10 +94,10 @@ vertical_alignment = 1
 
 [node name="CoinLabel" type="Label" parent="HUD/Control" unique_id=2044020648]
 layout_mode = 0
-offset_left = 320.0
-offset_top = 64.0
-offset_right = 473.0
-offset_bottom = 87.0
+offset_left = -184.0
+offset_top = 32.0
+offset_right = -31.0
+offset_bottom = 55.0
 text = "x00"
 label_settings = ExtResource("3_krm4r")
 horizontal_alignment = 1
@@ -107,10 +111,10 @@ autoplay = "default"
 
 [node name="WorldLabel" type="Label" parent="HUD/Control" unique_id=787262507]
 layout_mode = 0
-offset_left = 520.0
-offset_top = 56.0
-offset_right = 673.0
-offset_bottom = 105.0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 169.0
+offset_bottom = 73.0
 text = "World
 1-1"
 label_settings = ExtResource("3_krm4r")
@@ -119,10 +123,10 @@ vertical_alignment = 1
 
 [node name="TimeLabel" type="Label" parent="HUD/Control" unique_id=122887460]
 layout_mode = 0
-offset_left = 648.0
-offset_top = 56.0
-offset_right = 801.0
-offset_bottom = 79.0
+offset_left = 216.0
+offset_top = 24.0
+offset_right = 369.0
+offset_bottom = 63.0
 text = "Time
 dfghjk"
 label_settings = ExtResource("3_krm4r")
