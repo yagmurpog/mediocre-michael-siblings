@@ -10,6 +10,7 @@ const SPEED = 1500
 
 
 const common = preload("res://scripts/library.gd")
+@onready var game_manager = common.get_game_manager(self)
 
 var canDie = true
 var direction = 1
@@ -26,9 +27,11 @@ func _physics_process(delta: float) -> void:
 
 	if ray_cast_left.is_colliding():
 		direction = 1	
+
+
 	velocity.x = SPEED*delta * direction
-	
-	move_and_slide()
+	if not game_manager.stopEverything:
+		move_and_slide()
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:

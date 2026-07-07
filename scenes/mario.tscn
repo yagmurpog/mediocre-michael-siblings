@@ -235,6 +235,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_l5geh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q20sn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0xp7")
+}],
+"loop": 1,
+"name": &"shrink",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wnd63")
 }],
 "loop": 1,
@@ -289,8 +303,9 @@ script = ExtResource("1_wrvex")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1319236051]
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_4ckko")
-animation = &"get_big"
-frame_progress = 0.7704002
+animation = &"shrink"
+frame = 2
+frame_progress = 0.8132491
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=968970293]
 position = Vector2(0, 1)

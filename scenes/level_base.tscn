@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chbiph0wbgjyr" path="res://scenes/mario.tscn" id="1_58o6h"]
 [ext_resource type="Script" uid="uid://82q32yctu68q" path="res://scripts/game_manager.gd" id="1_krm4r"]
 [ext_resource type="Script" uid="uid://cgkl2aogyedhm" path="res://scripts/hud_manager.gd" id="2_8rhjg"]
-[ext_resource type="PackedScene" uid="uid://ihy3wfi5vtl6" path="res://scenes/levels/1-2.tscn" id="2_krm4r"]
+[ext_resource type="PackedScene" uid="uid://ccb2e3xyapnrt" path="res://scenes/levels/1-1.tscn" id="2_krm4r"]
 [ext_resource type="LabelSettings" uid="uid://dv3fpcbjygsce" path="res://assets/label_settings.tres" id="3_krm4r"]
 [ext_resource type="Texture2D" uid="uid://dlw6miyw2j123" path="res://assets/coins.png" id="4_8n3nq"]
 
@@ -59,6 +59,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=885433742 node_paths=PackedStringArray("player_label", "score_label")]
+unique_name_in_owner = true
 script = ExtResource("2_8rhjg")
 player_label = NodePath("Control/PlayerLabel")
 score_label = NodePath("Control/PlayerLabel/ScoreLabel")
@@ -132,3 +133,8 @@ dfghjk"
 label_settings = ExtResource("3_krm4r")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LevelTimer" type="Timer" parent="." unique_id=1972094625]
+autostart = true
+
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

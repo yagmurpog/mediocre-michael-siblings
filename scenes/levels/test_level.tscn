@@ -82,9 +82,6 @@ color = Color(0.36078432, 0.5803922, 0.9882353, 1)
 
 [node name="Gameplay Elements" type="Node" parent="TileMap" unique_id=424834768]
 
-[node name="LevelTimer" type="Timer" parent="." unique_id=397904098]
-autostart = true
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=401832855]
 stream = ExtResource("11_owgeq")
 autoplay = true

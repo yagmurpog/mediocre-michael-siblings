@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="10_meg7t"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_j7ukw"]
 [ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="12_6m1jm"]
-[ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="13_fcmsi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dj21o"]
 friction = 0.0
@@ -58,11 +57,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
 size = Vector2(14, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv52t"]
-size = Vector2(28, 11.5)
-
 [node name="Level" type="Node2D" unique_id=1805487705]
 script = ExtResource("1_yu1gn")
+start_pos = Vector2(2376, -56)
+levelTime = 3000
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1729556758]
 tile_set = ExtResource("2_mdmbe")
@@ -134,11 +132,9 @@ isInvinsible = true
 
 [node name="Goomba" parent="TileMap/Gameplay Elements" unique_id=938895401 instance=ExtResource("10_meg7t")]
 position = Vector2(2240, 8)
-collision_layer = 16
 
 [node name="Goomba2" parent="TileMap/Gameplay Elements" unique_id=1515553476 instance=ExtResource("10_meg7t")]
 position = Vector2(2256, 8)
-collision_layer = 16
 
 [node name="Qblock3" parent="TileMap/Gameplay Elements" unique_id=1785350388 instance=ExtResource("4_cj1vq")]
 position = Vector2(2296, -40)
@@ -228,51 +224,39 @@ isBrick = true
 
 [node name="Goomba3" parent="TileMap/Gameplay Elements" unique_id=1689470109 instance=ExtResource("10_meg7t")]
 position = Vector2(240, 8)
-collision_layer = 16
 
 [node name="Goomba4" parent="TileMap/Gameplay Elements" unique_id=206951486 instance=ExtResource("10_meg7t")]
 position = Vector2(104, 8)
-collision_layer = 16
 
 [node name="Goomba5" parent="TileMap/Gameplay Elements" unique_id=796236146 instance=ExtResource("10_meg7t")]
 position = Vector2(368, 8)
-collision_layer = 16
 
 [node name="Goomba6" parent="TileMap/Gameplay Elements" unique_id=1065336619 instance=ExtResource("10_meg7t")]
 position = Vector2(384, 8)
-collision_layer = 16
 
 [node name="Goomba7" parent="TileMap/Gameplay Elements" unique_id=1513932690 instance=ExtResource("10_meg7t")]
 position = Vector2(952, -120)
-collision_layer = 16
 
 [node name="Goomba8" parent="TileMap/Gameplay Elements" unique_id=705545232 instance=ExtResource("10_meg7t")]
 position = Vector2(968, -120)
-collision_layer = 16
 
 [node name="Goomba9" parent="TileMap/Gameplay Elements" unique_id=1538677967 instance=ExtResource("10_meg7t")]
 position = Vector2(1176, 8)
-collision_layer = 16
 
 [node name="Goomba10" parent="TileMap/Gameplay Elements" unique_id=742741692 instance=ExtResource("10_meg7t")]
 position = Vector2(1160, 8)
-collision_layer = 16
 
 [node name="Goomba11" parent="TileMap/Gameplay Elements" unique_id=1828741201 instance=ExtResource("10_meg7t")]
 position = Vector2(1472, 8)
-collision_layer = 16
 
 [node name="Goomba12" parent="TileMap/Gameplay Elements" unique_id=2077411426 instance=ExtResource("10_meg7t")]
 position = Vector2(1456, 8)
-collision_layer = 16
 
 [node name="Goomba13" parent="TileMap/Gameplay Elements" unique_id=967764208 instance=ExtResource("10_meg7t")]
 position = Vector2(1672, 8)
-collision_layer = 16
 
 [node name="Goomba14" parent="TileMap/Gameplay Elements" unique_id=1362537616 instance=ExtResource("10_meg7t")]
 position = Vector2(1656, 8)
-collision_layer = 16
 
 [node name="Qblock31" parent="TileMap/Gameplay Elements" unique_id=60806069 instance=ExtResource("4_cj1vq")]
 position = Vector2(808, -40)
@@ -411,13 +395,5 @@ frame_progress = 0.19232573
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1842509340]
 shape = SubResource("RectangleShape2D_yl3ha")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=288998480]
-position = Vector2(480, -47)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("13_fcmsi")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1859896273]
-shape = SubResource("RectangleShape2D_sv52t")
-
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[node name="Node2D" type="Node2D" parent="." unique_id=933190078]
+position = Vector2(-411.77744, -17.991348)

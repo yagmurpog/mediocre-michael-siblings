@@ -15,3 +15,11 @@ static func wait(caller: Node, time:float):
 
 static func get_theme(caller: Node):
   return caller.get_node("/root/LevelBase").loaded_level_theme
+
+static func get_game_manager(caller: Node):
+  return caller.get_node("/root/LevelBase")
+
+static func get_level_manager(caller: Node):
+  return caller.get_node("/root/LevelBase/Level")
+
+

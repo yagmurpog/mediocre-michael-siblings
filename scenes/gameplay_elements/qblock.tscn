@@ -13,7 +13,7 @@ region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6wb2"]
 atlas = ExtResource("1_7eis1")
-region = Rect2(164, 16, 16, 16)
+region = Rect2(181, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
 atlas = ExtResource("1_7eis1")
@@ -247,6 +247,7 @@ wait_time = 0.12
 bus = &"SFX"
 
 [node name="HitZone" type="Area2D" parent="." unique_id=596842647]
+visible = false
 collision_mask = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone" unique_id=401984789]
@@ -254,6 +255,7 @@ position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_jkv2x")
 
 [node name="ShellBumpZone" type="Area2D" parent="." unique_id=788509463]
+visible = false
 collision_layer = 0
 collision_mask = 128
 

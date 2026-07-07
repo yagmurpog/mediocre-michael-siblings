@@ -8,6 +8,7 @@ const fireball: Resource = preload("uid://bbvkd41rgv2lb")
 const JUMP_SFX = preload("res://assets/sound/sfx/jump.wav")
 
 const common = preload("res://scripts/library.gd")
+@onready var game_manager = common.get_game_manager(self)
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -35,7 +36,6 @@ var dead = false
 var canJump = false
 var tempInvincible = false
 var status = 0 # 0 smol, 1 big, #2 fire
-var suspendAnimations = false
 var coins = 0
 var score = 0
 @export var lives = 3
@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta * jump_modifier
 			
 			
-		if levelFinish:
+		if levelFinish :
 			velocity = Vector2.ZERO
 			if not flagpoleEndReached:
 				play_animation("hold")
@@ -86,8 +86,8 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("attack") and status == 2:
 			cast_fireball()
 
-		
-		move_and_slide()
+		if not game_manager.stopEverything:
+			move_and_slide()
 	
 
 func cast_fireball():
@@ -113,9 +113,18 @@ func take_damage():
 			sprite.offset.y = 0
 			var shap = RectangleShape2D.new()
 			shap.size = Vector2(12, 14)
+
+
 			collision_shape_2d.position.y = -8
 			collision_shape_2d.shape = shap
 			collision_shape_2d.position.y = 1
+
+			game_manager.stopEverything = true
+			sprite.play("shrink")
+			common.play_audio(self,preload("res://assets/sound/sfx/pipepowerdown.wav"))
+			await common.wait(self, 1.0)
+			game_manager.stopEverything = false
+
 			position.y -= 32
 		if status == 2:
 			status -= 1
@@ -128,6 +137,8 @@ func die():
 
 	audio_stream_player.stream = preload("res://assets/sound/sfx/death.wav")
 	audio_stream_player.play()
+	
+	common.get_level_manager(self).music.stop()
 
 	lives -= 1
 	await common.wait(self, 2.8)
@@ -151,9 +162,9 @@ func get_big():
 	sprite.offset.y = -8
 
 	sprite.play("get_big")
-	suspendAnimations = true
-	await common.wait(self, 0.5)
-	suspendAnimations = false
+	game_manager.stopEverything = true
+	await common.wait(self, 1.0)
+	game_manager.stopEverything = false
 	
 	
 func fire_up():
@@ -169,7 +180,7 @@ func goomba_stomp(vel):
 
 # very jank
 func play_animation(animationName):
-	if not suspendAnimations:
+	if not game_manager.stopEverything:
 		match status:
 			0: # small
 				match animationName:

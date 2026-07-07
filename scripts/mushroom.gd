@@ -13,7 +13,7 @@ var isMoving = false
 @export var oneUp: Texture
 
 const common = preload("res://scripts/library.gd")
-
+@onready var game_manager = common.get_game_manager(self)
 func _ready() -> void:
 	if isOneUp:
 		sprite.texture = oneUp
@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 
 	if ray_cast_left.is_colliding():
 		direction = 1	
-	if isMoving:
+	if isMoving and not game_manager.stopEverything:
 		velocity.x = SPEED*delta * direction
 		move_and_slide()
 	

@@ -4,6 +4,8 @@ extends CanvasLayer
 @export var score_label: Label
 @onready var coin_label: Label = $Control/CoinLabel
 @onready var time_label: Label = $Control/TimeLabel
+@onready var world_label: Label = $Control/WorldLabel
+
 
 
 func _ready() -> void:
@@ -19,3 +21,6 @@ func update_coin(update_value):
 
 func update_time(update_value):
 	time_label.text =  "TIME\n"+ update_value 
+
+func update_world(update_value):
+	world_label.text =  "WORLD\n"+ update_value 
