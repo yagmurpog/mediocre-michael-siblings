@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://chbiph0wbgjyr" path="res://scenes/mario.tscn" id="1_58o6h"]
 [ext_resource type="Script" uid="uid://82q32yctu68q" path="res://scripts/game_manager.gd" id="1_krm4r"]
+[ext_resource type="PackedScene" uid="uid://ccb2e3xyapnrt" path="res://scenes/levels/1-1.tscn" id="2_8n3nq"]
 [ext_resource type="Script" uid="uid://cgkl2aogyedhm" path="res://scripts/hud_manager.gd" id="2_8rhjg"]
-[ext_resource type="PackedScene" uid="uid://ccb2e3xyapnrt" path="res://scenes/levels/1-1.tscn" id="2_krm4r"]
 [ext_resource type="LabelSettings" uid="uid://dv3fpcbjygsce" path="res://assets/label_settings.tres" id="3_krm4r"]
 [ext_resource type="Texture2D" uid="uid://dlw6miyw2j123" path="res://assets/coins.png" id="4_8n3nq"]
+[ext_resource type="Texture2D" uid="uid://c2h21ih3e534v" path="res://assets/mario.png" id="7_8n3nq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8y0u"]
 atlas = ExtResource("4_8n3nq")
@@ -39,9 +40,13 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl3ha"]
+atlas = ExtResource("7_8n3nq")
+region = Rect2(0, 8, 16, 16)
+
 [node name="LevelBase" type="Node2D" unique_id=1169482387]
 script = ExtResource("1_krm4r")
-first_level = ExtResource("2_krm4r")
+first_level = ExtResource("2_8n3nq")
 
 [node name="mario" parent="." unique_id=1038047173 node_paths=PackedStringArray("hud") instance=ExtResource("1_58o6h")]
 unique_name_in_owner = true
@@ -133,6 +138,53 @@ dfghjk"
 label_settings = ExtResource("3_krm4r")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SplashControl" type="Control" parent="HUD" unique_id=193931100]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/SplashControl" unique_id=296711503]
+position = Vector2(-40, -24)
+scale = Vector2(2.5537002, 2.5537002)
+texture = SubResource("AtlasTexture_yl3ha")
+
+[node name="SplashWorldLabel" type="Label" parent="HUD/SplashControl" unique_id=1449697568]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -120.0
+offset_right = 64.0
+offset_bottom = -97.0
+text = "world 1-1"
+label_settings = ExtResource("3_krm4r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SplashLivesLabel" type="Label" parent="HUD/SplashControl" unique_id=1879308503]
+layout_mode = 0
+offset_left = -56.0
+offset_top = -32.0
+offset_right = 88.0
+offset_bottom = -9.0
+text = "x 3"
+label_settings = ExtResource("3_krm4r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HUD/SplashControl" unique_id=386909010]
+z_index = -1
+layout_mode = 1
+offset_left = -680.00006
+offset_top = -392.00003
+offset_right = -640.00006
+offset_bottom = -352.00003
+scale = Vector2(33.849224, 19.498192)
+color = Color(0, 0, 0, 1)
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1972094625]
 autostart = true

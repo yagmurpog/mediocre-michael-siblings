@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ccb2e3xyapnrt"]
 
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/level_manager.gd" id="1_yu1gn"]
+[ext_resource type="PackedScene" uid="uid://ihy3wfi5vtl6" path="res://scenes/levels/1-2.tscn" id="2_3gwmd"]
 [ext_resource type="TileSet" uid="uid://b18f8j062gt0s" path="res://assets/main_tileset.tres" id="2_mdmbe"]
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="3_ekjf4"]
 [ext_resource type="PackedScene" uid="uid://cnppx7s1luu35" path="res://scenes/gameplay_elements/qblock.tscn" id="4_cj1vq"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="10_meg7t"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_j7ukw"]
 [ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="12_6m1jm"]
+[ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="14_yu1gn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dj21o"]
 friction = 0.0
@@ -57,10 +59,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
 size = Vector2(14, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0p7"]
+size = Vector2(28, 8)
+
 [node name="Level" type="Node2D" unique_id=1805487705]
 script = ExtResource("1_yu1gn")
-start_pos = Vector2(2376, -56)
+start_pos = Vector2(479, -100)
+next_level = ExtResource("2_3gwmd")
 levelTime = 3000
+levelName = "one dash one"
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1729556758]
 tile_set = ExtResource("2_mdmbe")
@@ -397,3 +404,13 @@ shape = SubResource("RectangleShape2D_yl3ha")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=933190078]
 position = Vector2(-411.77744, -17.991348)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1010672723]
+position = Vector2(479, -43)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("14_yu1gn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2054922892]
+position = Vector2(1, -6)
+shape = SubResource("RectangleShape2D_tx0p7")

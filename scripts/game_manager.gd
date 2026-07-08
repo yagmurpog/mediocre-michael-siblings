@@ -14,7 +14,7 @@ var timeRemanining = 300
 var stopEverything:bool = false #KRIS GET THE BANANA ...  potassium 
 
 func _ready() -> void:
-	load_level(first_level)
+	show_splash(first_level)
 
 
 func _process(delta: float) -> void:
@@ -44,3 +44,27 @@ func _on_level_timer_timeout() -> void:
 	if timeRemanining < 1:
 		mario.die()
 	hud.update_time(str(timeRemanining))
+
+
+func show_splash(level_to_load):
+	hud.splash_control.show()
+	hud.world_splash_label.text = level_to_load.instantiate().levelName
+	hud.lives_splash_label.text =  "x " + str(mario.lives)
+	await common.wait(self, 1.0)
+	hud.splash_control.hide()
+	load_level(level_to_load)
+
+func count_score(levelToLoad):
+	mario.hide()
+	mario.stopZoneReached = true
+	await common.wait(self,4.0)
+	
+	# do the counting here
+
+	hud.splash_control.show()
+	await common.wait(self, 1.0)
+	hud.splash_control.hide()
+	mario.resetMovement()
+	mario.show()
+	load_level(levelToLoad)
+	pass

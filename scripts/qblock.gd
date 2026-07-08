@@ -76,6 +76,7 @@ func hit(body):
 		audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
 		animation_player.play("brick_hit")
 		if body.status > 0:
+			body.add_score(50, "50")
 			audio_stream_player.stream = preload("res://assets/sound/sfx/brick.wav")
 
 

@@ -16,6 +16,8 @@ const common = preload("res://scripts/library.gd")
 @onready var timer: Timer = $Timer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+@onready var raycast_down: Area2D = $RayCastDown
+
 @export var hud: CanvasLayer
 
 
@@ -52,16 +54,26 @@ var stopZoneReached: bool = false
 var jump_modifier: float
 
 
+func apply_gravity(delta):
+	jump_modifier = 0.5 if Input.is_action_pressed("jump") and isJumping else 1.0
+	velocity += get_gravity() * delta * jump_modifier
+
+func apply_run_multipliers():
+	if Input.is_action_pressed("run"):
+		speedMultiplier = 1.5
+		sprite.speed_scale = 1.8
+	else:
+		sprite.speed_scale = 1
+		speedMultiplier = 1
+
+
 func _physics_process(delta: float) -> void:
 	if not dead:
 		if (not is_on_floor() and not levelFinish):
-
-			jump_modifier = 0.5 if Input.is_action_pressed("jump") and isJumping else 1.0
-
-			velocity += get_gravity() * delta * jump_modifier
+			apply_gravity(delta)
 			
 			
-		if levelFinish :
+		if levelFinish:
 			velocity = Vector2.ZERO
 			if not flagpoleEndReached:
 				play_animation("hold")
@@ -72,18 +84,21 @@ func _physics_process(delta: float) -> void:
 				if not stopZoneReached:
 					auto_move(delta)
 		else:
-			jump(delta)
-			move(delta)
+			if not game_manager.stopEverything:
+				jump(delta)
+				move(delta)
 		
-		#run
-		if Input.is_action_pressed("run"):
-			speedMultiplier = 1.5
-			sprite.speed_scale = 1.8
-		else:
-			sprite.speed_scale = 1
-			speedMultiplier = 1
 
-		if Input.is_action_just_pressed("attack") and status == 2:
+		
+		for body in raycast_down.get_overlapping_bodies():
+			print("no")
+			if body:
+				print("yup")
+
+		#run
+		apply_run_multipliers()
+
+		if Input.is_action_just_pressed("attack") and status == 2 and not game_manager.stopEverything:
 			cast_fireball()
 
 		if not game_manager.stopEverything:
@@ -121,7 +136,7 @@ func take_damage():
 
 			game_manager.stopEverything = true
 			sprite.play("shrink")
-			common.play_audio(self,preload("res://assets/sound/sfx/pipepowerdown.wav"))
+			common.play_audio(self, preload("res://assets/sound/sfx/pipepowerdown.wav"))
 			await common.wait(self, 1.0)
 			game_manager.stopEverything = false
 
@@ -135,19 +150,23 @@ func die():
 	play_animation("die")
 	animation_player.play("die")
 
-	audio_stream_player.stream = preload("res://assets/sound/sfx/death.wav")
-	audio_stream_player.play()
+	common.play_audio(self,preload("res://assets/sound/sfx/death.wav" ))
 	
 	common.get_level_manager(self).music.stop()
 
 	lives -= 1
 	await common.wait(self, 2.8)
-	get_tree().reload_current_scene()
+	await game_manager.show_splash(game_manager.first_level)
+	resetMovement()
+	sprite.position = Vector2.ZERO
+	self.show()
+	dead = false
 		
 func get_big():
 	add_score(1000, "lmao")
 
-	if status < 2:
+	common.play_audio(self, preload("res://assets/sound/sfx/powerup.wav"))
+	if not status >= 1:
 		status = 1
 	else:
 		return
@@ -156,9 +175,7 @@ func get_big():
 	collision_shape_2d.position.y = -8
 	collision_shape_2d.shape = shap
 	
-	common.play_audio(self, preload("res://assets/sound/sfx/powerup.wav"))
 	
-
 	sprite.offset.y = -8
 
 	sprite.play("get_big")
@@ -170,8 +187,13 @@ func get_big():
 func fire_up():
 	if status == 0:
 		get_big()
+	else:
+		common.play_audio(self, preload("res://assets/sound/sfx/powerup.wav"))
 	status = 2
 	add_score(1000, "lmao")
+	game_manager.stopEverything = true
+	await common.wait(self, 1.0)
+	game_manager.stopEverything = false
 	
 	
 func goomba_stomp(vel):
@@ -238,7 +260,7 @@ func jump(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y -= 15000 * delta
 		isJumping = true
-		common.play_audio(self,preload("res://assets/sound/sfx/jump.wav"))
+		common.play_audio(self, preload("res://assets/sound/sfx/jump.wav"))
 
 
 func _input(event: InputEvent) -> void:
@@ -308,3 +330,10 @@ func increase_coin(amount, caller):
 
 func _on_timer_timeout() -> void:
 	tempInvincible = false
+
+func resetMovement():
+	velocity = Vector2.ZERO
+	isJumping = false
+	flagpoleEndReached = false
+	levelFinish = false
+	stopZoneReached = false

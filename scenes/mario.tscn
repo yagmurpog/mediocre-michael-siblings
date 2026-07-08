@@ -296,6 +296,9 @@ _data = {
 &"die": SubResource("Animation_wrvex")
 }
 
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_yl3ha"]
+length = 14.0
+
 [node name="mario" type="CharacterBody2D" unique_id=1038047173]
 collision_layer = 2
 script = ExtResource("1_wrvex")
@@ -315,9 +318,18 @@ shape = SubResource("RectangleShape2D_4gsdp")
 libraries/ = SubResource("AnimationLibrary_4ckko")
 
 [node name="Timer" type="Timer" parent="." unique_id=1787637796]
+wait_time = 1.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=466349976]
 max_polyphony = 5
 bus = &"SFX"
+
+[node name="RayCastDown" type="Area2D" parent="." unique_id=1885463141]
+position = Vector2(0, 2)
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayCastDown" unique_id=447196607]
+shape = SubResource("SeparationRayShape2D_yl3ha")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

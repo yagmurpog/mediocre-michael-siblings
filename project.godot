@@ -64,6 +64,7 @@ start={
 2d_physics/layer_5="Enemies"
 2d_physics/layer_7="Blocks"
 2d_physics/layer_8="koopa troopa"
+2d_physics/layer_9="pipe entrance"
 
 [physics]
 

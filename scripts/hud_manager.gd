@@ -7,6 +7,11 @@ extends CanvasLayer
 @onready var world_label: Label = $Control/WorldLabel
 
 
+@onready var splash_control: Control = $SplashControl
+@onready var world_splash_label: Label = $SplashControl/SplashWorldLabel
+@onready var lives_splash_label: Label = $SplashControl/SplashLivesLabel
+
+
 
 func _ready() -> void:
 	player_label.text = "michael"
