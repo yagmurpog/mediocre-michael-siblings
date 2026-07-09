@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://bfn8igr6wm21s"]
 
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/level_manager.gd" id="1_klxoj"]
+[ext_resource type="PackedScene" uid="uid://ihy3wfi5vtl6" path="res://scenes/levels/1-2.tscn" id="2_bm3hx"]
 [ext_resource type="TileSet" uid="uid://b18f8j062gt0s" path="res://assets/main_tileset.tres" id="2_u3yl2"]
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="3_bm3hx"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="4_2cefc"]
 
 [node name="Level" type="Node2D" unique_id=1748693938]
 script = ExtResource("1_klxoj")
+start_pos = Vector2(168, 8)
+next_level = ExtResource("2_bm3hx")
 levelTime = 100
+levelName = "1-2"
 autoWalkLevel = true
 
 [node name="TileMap" type="TileMap" parent="." unique_id=2103133983]

@@ -11,7 +11,7 @@ var timeRemanining = 300
 @onready var mario = %mario
 @onready var hud = %HUD
 
-var stopEverything:bool = false #KRIS GET THE BANANA ...  potassium 
+var stopEverything: bool = false # KRIS GET THE BANANA ...  potassium
 
 func _ready() -> void:
 	show_splash(first_level)
@@ -27,14 +27,17 @@ func load_level(level: Resource, spawn_pos = null):
 	
 	loaded_level = level.instantiate()
 	loaded_level_theme = loaded_level.level_theme
+	
+	mario.autoMove = loaded_level.autoWalkLevel
+		
 
 	timeRemanining = loaded_level.levelTime
 	hud.update_world(loaded_level.levelName)
 
 	if spawn_pos:
-		%mario.position = spawn_pos
+		mario.position = spawn_pos
 	else:
-		%mario.position = loaded_level.start_pos
+		mario.position = loaded_level.start_pos
 
 	self.add_child(loaded_level)
 
@@ -49,7 +52,7 @@ func _on_level_timer_timeout() -> void:
 func show_splash(level_to_load):
 	hud.splash_control.show()
 	hud.world_splash_label.text = level_to_load.instantiate().levelName
-	hud.lives_splash_label.text =  "x " + str(mario.lives)
+	hud.lives_splash_label.text = "x " + str(mario.lives)
 	await common.wait(self, 1.0)
 	hud.splash_control.hide()
 	load_level(level_to_load)
@@ -57,7 +60,7 @@ func show_splash(level_to_load):
 func count_score(levelToLoad):
 	mario.hide()
 	mario.stopZoneReached = true
-	await common.wait(self,4.0)
+	await common.wait(self, 4.0)
 	
 	# do the counting here
 

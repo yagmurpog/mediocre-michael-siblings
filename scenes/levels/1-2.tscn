@@ -27,6 +27,7 @@ tile_map_data = PackedByteArray("AADk/wAAAAAAABQAAADl/wAAAAAAABQAAADm/wAAAAAAABQ
 tile_set = ExtResource("3_xl2p1")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1455648943]
+visible = false
 z_index = -3
 offset_left = -2488.0002
 offset_top = -1304.0
@@ -1146,6 +1147,742 @@ isBrick = true
 
 [node name="Qblock280" parent="Node" unique_id=1323157748 instance=ExtResource("4_bogsv")]
 position = Vector2(2216, -40)
+isBrick = true
+
+[node name="Qblock288" parent="Node" unique_id=1304542650 instance=ExtResource("4_bogsv")]
+position = Vector2(2280, -8)
+isBrick = true
+
+[node name="Qblock289" parent="Node" unique_id=1999503425 instance=ExtResource("4_bogsv")]
+position = Vector2(2264, -8)
+isBrick = true
+
+[node name="Qblock290" parent="Node" unique_id=861560235 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -8)
+isBrick = true
+
+[node name="Qblock291" parent="Node" unique_id=1914442670 instance=ExtResource("4_bogsv")]
+position = Vector2(2296, -8)
+isBrick = true
+
+[node name="Qblock292" parent="Node" unique_id=1160295373 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -8)
+isBrick = true
+
+[node name="Qblock293" parent="Node" unique_id=1718123549 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -8)
+isBrick = true
+
+[node name="Qblock294" parent="Node" unique_id=143060436 instance=ExtResource("4_bogsv")]
+position = Vector2(2280, -24)
+isBrick = true
+
+[node name="Qblock295" parent="Node" unique_id=793516803 instance=ExtResource("4_bogsv")]
+position = Vector2(2264, -24)
+isBrick = true
+
+[node name="Qblock296" parent="Node" unique_id=1962244698 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -24)
+isBrick = true
+
+[node name="Qblock297" parent="Node" unique_id=1073453059 instance=ExtResource("4_bogsv")]
+position = Vector2(2296, -24)
+isBrick = true
+
+[node name="Qblock298" parent="Node" unique_id=606713467 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -24)
+isBrick = true
+
+[node name="Qblock299" parent="Node" unique_id=421367781 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -8)
+isBrick = true
+
+[node name="Qblock300" parent="Node" unique_id=2107502866 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -24)
+isBrick = true
+
+[node name="Qblock301" parent="Node" unique_id=202562513 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -24)
+isBrick = true
+
+[node name="Qblock302" parent="Node" unique_id=2083865253 instance=ExtResource("4_bogsv")]
+position = Vector2(2280, -40)
+isBrick = true
+
+[node name="Qblock303" parent="Node" unique_id=900347713 instance=ExtResource("4_bogsv")]
+position = Vector2(2264, -40)
+isBrick = true
+
+[node name="Qblock304" parent="Node" unique_id=662943328 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -40)
+isBrick = true
+
+[node name="Qblock305" parent="Node" unique_id=896689676 instance=ExtResource("4_bogsv")]
+position = Vector2(2296, -40)
+isBrick = true
+
+[node name="Qblock306" parent="Node" unique_id=1491844947 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -40)
+isBrick = true
+
+[node name="Qblock307" parent="Node" unique_id=391085528 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -40)
+isBrick = true
+
+[node name="Qblock308" parent="Node" unique_id=427590858 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -40)
+isBrick = true
+
+[node name="Qblock309" parent="Node" unique_id=289799668 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -8)
+isBrick = true
+
+[node name="Qblock310" parent="Node" unique_id=1202544709 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -8)
+isBrick = true
+
+[node name="Qblock312" parent="Node" unique_id=1102785352 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -8)
+isBrick = true
+
+[node name="Qblock315" parent="Node" unique_id=954801565 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -24)
+isBrick = true
+
+[node name="Qblock316" parent="Node" unique_id=1304273488 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -24)
+isBrick = true
+
+[node name="Qblock318" parent="Node" unique_id=55604016 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -24)
+isBrick = true
+
+[node name="Qblock323" parent="Node" unique_id=1938214453 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -40)
+isBrick = true
+
+[node name="Qblock324" parent="Node" unique_id=461264379 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -40)
+isBrick = true
+
+[node name="Qblock326" parent="Node" unique_id=205204865 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -40)
+isBrick = true
+
+[node name="Qblock351" parent="Node" unique_id=1359947034 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -56)
+isBrick = true
+
+[node name="Qblock352" parent="Node" unique_id=1956622970 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -56)
+isBrick = true
+
+[node name="Qblock353" parent="Node" unique_id=1683466054 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -56)
+isBrick = true
+
+[node name="Qblock354" parent="Node" unique_id=724421434 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -56)
+isBrick = true
+
+[node name="Qblock355" parent="Node" unique_id=1511609646 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -56)
+isBrick = true
+
+[node name="Qblock356" parent="Node" unique_id=1457724050 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -56)
+isBrick = true
+
+[node name="Qblock357" parent="Node" unique_id=435534733 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -56)
+isBrick = true
+
+[node name="Qblock358" parent="Node" unique_id=1693928731 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -72)
+isBrick = true
+
+[node name="Qblock359" parent="Node" unique_id=346445145 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -72)
+isBrick = true
+
+[node name="Qblock360" parent="Node" unique_id=409860268 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -72)
+isBrick = true
+
+[node name="Qblock361" parent="Node" unique_id=1236063165 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -72)
+isBrick = true
+
+[node name="Qblock362" parent="Node" unique_id=694772030 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -72)
+isBrick = true
+
+[node name="Qblock363" parent="Node" unique_id=488239238 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -72)
+isBrick = true
+
+[node name="Qblock364" parent="Node" unique_id=1407710357 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -72)
+isBrick = true
+
+[node name="Qblock365" parent="Node" unique_id=1370110733 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -88)
+isBrick = true
+
+[node name="Qblock366" parent="Node" unique_id=1278724146 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -88)
+isBrick = true
+
+[node name="Qblock367" parent="Node" unique_id=1863634151 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -88)
+isBrick = true
+
+[node name="Qblock368" parent="Node" unique_id=433305435 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -88)
+isBrick = true
+
+[node name="Qblock369" parent="Node" unique_id=2047513651 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -88)
+isBrick = true
+
+[node name="Qblock370" parent="Node" unique_id=537857994 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -88)
+isBrick = true
+
+[node name="Qblock371" parent="Node" unique_id=1484932345 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -88)
+isBrick = true
+
+[node name="Qblock372" parent="Node" unique_id=106719773 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -104)
+isBrick = true
+
+[node name="Qblock373" parent="Node" unique_id=1980308016 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -104)
+isBrick = true
+
+[node name="Qblock374" parent="Node" unique_id=632966997 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -104)
+isBrick = true
+
+[node name="Qblock375" parent="Node" unique_id=397273494 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -104)
+isBrick = true
+
+[node name="Qblock376" parent="Node" unique_id=967006918 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -104)
+isBrick = true
+
+[node name="Qblock377" parent="Node" unique_id=178218704 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -104)
+isBrick = true
+
+[node name="Qblock378" parent="Node" unique_id=782846401 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -104)
+isBrick = true
+
+[node name="Qblock379" parent="Node" unique_id=374390892 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -120)
+isBrick = true
+
+[node name="Qblock380" parent="Node" unique_id=1488261382 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -120)
+isBrick = true
+
+[node name="Qblock381" parent="Node" unique_id=614319973 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -120)
+isBrick = true
+
+[node name="Qblock382" parent="Node" unique_id=760477783 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -120)
+isBrick = true
+
+[node name="Qblock383" parent="Node" unique_id=662226920 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -120)
+isBrick = true
+
+[node name="Qblock384" parent="Node" unique_id=506589312 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -120)
+isBrick = true
+
+[node name="Qblock385" parent="Node" unique_id=1380142892 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -120)
+isBrick = true
+
+[node name="Qblock386" parent="Node" unique_id=2009336191 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -136)
+isBrick = true
+
+[node name="Qblock387" parent="Node" unique_id=155889694 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -136)
+isBrick = true
+
+[node name="Qblock388" parent="Node" unique_id=560696345 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -136)
+isBrick = true
+
+[node name="Qblock389" parent="Node" unique_id=699625952 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -136)
+isBrick = true
+
+[node name="Qblock390" parent="Node" unique_id=1135399776 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -136)
+isBrick = true
+
+[node name="Qblock391" parent="Node" unique_id=869742016 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -136)
+isBrick = true
+
+[node name="Qblock392" parent="Node" unique_id=64860902 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -136)
+isBrick = true
+
+[node name="Qblock393" parent="Node" unique_id=411250502 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -152)
+isBrick = true
+
+[node name="Qblock394" parent="Node" unique_id=1752015755 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -152)
+isBrick = true
+
+[node name="Qblock395" parent="Node" unique_id=648637697 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -152)
+isBrick = true
+
+[node name="Qblock396" parent="Node" unique_id=934150243 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -152)
+isBrick = true
+
+[node name="Qblock397" parent="Node" unique_id=1726462819 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -152)
+isBrick = true
+
+[node name="Qblock398" parent="Node" unique_id=279308476 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -152)
+isBrick = true
+
+[node name="Qblock399" parent="Node" unique_id=313329201 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -152)
+isBrick = true
+
+[node name="Qblock400" parent="Node" unique_id=198264506 instance=ExtResource("4_bogsv")]
+position = Vector2(2312, -168)
+isBrick = true
+
+[node name="Qblock401" parent="Node" unique_id=631802661 instance=ExtResource("4_bogsv")]
+position = Vector2(2344, -168)
+isBrick = true
+
+[node name="Qblock402" parent="Node" unique_id=1209995480 instance=ExtResource("4_bogsv")]
+position = Vector2(2360, -168)
+isBrick = true
+
+[node name="Qblock403" parent="Node" unique_id=1714883362 instance=ExtResource("4_bogsv")]
+position = Vector2(2328, -168)
+isBrick = true
+
+[node name="Qblock404" parent="Node" unique_id=1856371363 instance=ExtResource("4_bogsv")]
+position = Vector2(2392, -168)
+isBrick = true
+
+[node name="Qblock405" parent="Node" unique_id=947246584 instance=ExtResource("4_bogsv")]
+position = Vector2(2376, -168)
+isBrick = true
+
+[node name="Qblock406" parent="Node" unique_id=108303163 instance=ExtResource("4_bogsv")]
+position = Vector2(2408, -168)
+isBrick = true
+
+[node name="Qblock311" parent="Node" unique_id=658355326 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -8)
+isBrick = true
+
+[node name="Qblock313" parent="Node" unique_id=629862116 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -8)
+isBrick = true
+
+[node name="Qblock317" parent="Node" unique_id=1635643014 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -24)
+isBrick = true
+
+[node name="Qblock319" parent="Node" unique_id=12803327 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -24)
+isBrick = true
+
+[node name="Qblock325" parent="Node" unique_id=410203436 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -40)
+isBrick = true
+
+[node name="Qblock327" parent="Node" unique_id=219696009 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -40)
+isBrick = true
+
+[node name="Qblock417" parent="Node" unique_id=1604071608 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -56)
+isBrick = true
+
+[node name="Qblock418" parent="Node" unique_id=2025413438 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -56)
+isBrick = true
+
+[node name="Qblock419" parent="Node" unique_id=1492952279 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -72)
+isBrick = true
+
+[node name="Qblock420" parent="Node" unique_id=306498260 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -72)
+isBrick = true
+
+[node name="Qblock421" parent="Node" unique_id=1217199610 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -88)
+isBrick = true
+
+[node name="Qblock422" parent="Node" unique_id=1218867577 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -88)
+isBrick = true
+
+[node name="Qblock423" parent="Node" unique_id=1712433473 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -104)
+isBrick = true
+
+[node name="Qblock424" parent="Node" unique_id=781829384 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -104)
+isBrick = true
+
+[node name="Qblock425" parent="Node" unique_id=1843668438 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -120)
+isBrick = true
+
+[node name="Qblock426" parent="Node" unique_id=2089319325 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -120)
+isBrick = true
+
+[node name="Qblock427" parent="Node" unique_id=318508081 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -136)
+isBrick = true
+
+[node name="Qblock428" parent="Node" unique_id=1512097129 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -136)
+isBrick = true
+
+[node name="Qblock429" parent="Node" unique_id=1620913666 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -152)
+isBrick = true
+
+[node name="Qblock430" parent="Node" unique_id=1737628473 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -152)
+isBrick = true
+
+[node name="Qblock431" parent="Node" unique_id=2048495386 instance=ExtResource("4_bogsv")]
+position = Vector2(2632, -168)
+isBrick = true
+
+[node name="Qblock432" parent="Node" unique_id=1710254072 instance=ExtResource("4_bogsv")]
+position = Vector2(2648, -168)
+isBrick = true
+
+[node name="Qblock314" parent="Node" unique_id=1683355534 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -8)
+isBrick = true
+
+[node name="Qblock320" parent="Node" unique_id=1715800133 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -8)
+isBrick = true
+
+[node name="Qblock321" parent="Node" unique_id=971547004 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -24)
+isBrick = true
+
+[node name="Qblock322" parent="Node" unique_id=805210680 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -24)
+isBrick = true
+
+[node name="Qblock328" parent="Node" unique_id=2065353945 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -40)
+isBrick = true
+
+[node name="Qblock329" parent="Node" unique_id=658056520 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -40)
+isBrick = true
+
+[node name="Qblock433" parent="Node" unique_id=146033034 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -56)
+isBrick = true
+
+[node name="Qblock434" parent="Node" unique_id=662797900 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -56)
+isBrick = true
+
+[node name="Qblock435" parent="Node" unique_id=1469483601 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -72)
+isBrick = true
+
+[node name="Qblock436" parent="Node" unique_id=762391081 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -72)
+isBrick = true
+
+[node name="Qblock437" parent="Node" unique_id=1885112715 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -88)
+isBrick = true
+
+[node name="Qblock438" parent="Node" unique_id=104495763 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -88)
+isBrick = true
+
+[node name="Qblock439" parent="Node" unique_id=66893983 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -104)
+isBrick = true
+
+[node name="Qblock440" parent="Node" unique_id=1729031476 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -104)
+isBrick = true
+
+[node name="Qblock441" parent="Node" unique_id=753856213 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -120)
+isBrick = true
+
+[node name="Qblock442" parent="Node" unique_id=681255255 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -120)
+isBrick = true
+
+[node name="Qblock443" parent="Node" unique_id=1131453439 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -136)
+isBrick = true
+
+[node name="Qblock444" parent="Node" unique_id=760836317 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -136)
+isBrick = true
+
+[node name="Qblock445" parent="Node" unique_id=1366837148 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -152)
+isBrick = true
+
+[node name="Qblock446" parent="Node" unique_id=1761374172 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -152)
+isBrick = true
+
+[node name="Qblock447" parent="Node" unique_id=139131967 instance=ExtResource("4_bogsv")]
+position = Vector2(2664, -168)
+isBrick = true
+
+[node name="Qblock448" parent="Node" unique_id=1568615210 instance=ExtResource("4_bogsv")]
+position = Vector2(2680, -168)
+isBrick = true
+
+[node name="Qblock330" parent="Node" unique_id=1997906026 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -8)
+isBrick = true
+
+[node name="Qblock331" parent="Node" unique_id=156447754 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -8)
+isBrick = true
+
+[node name="Qblock332" parent="Node" unique_id=416948247 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -24)
+isBrick = true
+
+[node name="Qblock333" parent="Node" unique_id=1924891775 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -24)
+isBrick = true
+
+[node name="Qblock334" parent="Node" unique_id=857357298 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -40)
+isBrick = true
+
+[node name="Qblock335" parent="Node" unique_id=261611201 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -40)
+isBrick = true
+
+[node name="Qblock449" parent="Node" unique_id=39287919 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -56)
+isBrick = true
+
+[node name="Qblock450" parent="Node" unique_id=1933134280 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -56)
+isBrick = true
+
+[node name="Qblock451" parent="Node" unique_id=1134578881 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -72)
+isBrick = true
+
+[node name="Qblock452" parent="Node" unique_id=1981649458 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -72)
+isBrick = true
+
+[node name="Qblock453" parent="Node" unique_id=1049814231 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -88)
+isBrick = true
+
+[node name="Qblock454" parent="Node" unique_id=1527577066 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -88)
+isBrick = true
+
+[node name="Qblock455" parent="Node" unique_id=2080283059 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -104)
+isBrick = true
+
+[node name="Qblock456" parent="Node" unique_id=114477146 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -104)
+isBrick = true
+
+[node name="Qblock457" parent="Node" unique_id=1155665027 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -120)
+isBrick = true
+
+[node name="Qblock458" parent="Node" unique_id=250720349 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -120)
+isBrick = true
+
+[node name="Qblock459" parent="Node" unique_id=1781275087 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -136)
+isBrick = true
+
+[node name="Qblock460" parent="Node" unique_id=80118999 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -136)
+isBrick = true
+
+[node name="Qblock461" parent="Node" unique_id=809739728 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -152)
+isBrick = true
+
+[node name="Qblock462" parent="Node" unique_id=1408314947 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -152)
+isBrick = true
+
+[node name="Qblock463" parent="Node" unique_id=445533373 instance=ExtResource("4_bogsv")]
+position = Vector2(2696, -168)
+isBrick = true
+
+[node name="Qblock464" parent="Node" unique_id=804076905 instance=ExtResource("4_bogsv")]
+position = Vector2(2712, -168)
+isBrick = true
+
+[node name="Qblock336" parent="Node" unique_id=6395438 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -8)
+isBrick = true
+
+[node name="Qblock337" parent="Node" unique_id=1386122490 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -8)
+isBrick = true
+
+[node name="Qblock338" parent="Node" unique_id=1645807698 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -24)
+isBrick = true
+
+[node name="Qblock339" parent="Node" unique_id=1942070819 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -24)
+isBrick = true
+
+[node name="Qblock340" parent="Node" unique_id=1861294111 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -40)
+isBrick = true
+
+[node name="Qblock341" parent="Node" unique_id=1821441764 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -40)
+isBrick = true
+
+[node name="Qblock465" parent="Node" unique_id=2075860565 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -56)
+isBrick = true
+
+[node name="Qblock466" parent="Node" unique_id=656600868 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -56)
+isBrick = true
+
+[node name="Qblock467" parent="Node" unique_id=215906479 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -72)
+isBrick = true
+
+[node name="Qblock468" parent="Node" unique_id=1002924486 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -72)
+isBrick = true
+
+[node name="Qblock469" parent="Node" unique_id=1189360532 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -88)
+isBrick = true
+
+[node name="Qblock470" parent="Node" unique_id=47372717 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -88)
+isBrick = true
+
+[node name="Qblock471" parent="Node" unique_id=1766602889 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -104)
+isBrick = true
+
+[node name="Qblock472" parent="Node" unique_id=1585253197 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -104)
+isBrick = true
+
+[node name="Qblock473" parent="Node" unique_id=622539189 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -120)
+isBrick = true
+
+[node name="Qblock474" parent="Node" unique_id=1058798319 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -120)
+isBrick = true
+
+[node name="Qblock475" parent="Node" unique_id=370851898 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -136)
+isBrick = true
+
+[node name="Qblock476" parent="Node" unique_id=310917438 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -136)
+isBrick = true
+
+[node name="Qblock477" parent="Node" unique_id=416707161 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -152)
+isBrick = true
+
+[node name="Qblock478" parent="Node" unique_id=1874771400 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -152)
+isBrick = true
+
+[node name="Qblock479" parent="Node" unique_id=531457436 instance=ExtResource("4_bogsv")]
+position = Vector2(2728, -168)
+isBrick = true
+
+[node name="Qblock480" parent="Node" unique_id=1077514014 instance=ExtResource("4_bogsv")]
+position = Vector2(2744, -168)
+isBrick = true
+
+[node name="Qblock407" parent="Node" unique_id=351747762 instance=ExtResource("4_bogsv")]
+position = Vector2(2424, -168)
+isBrick = true
+
+[node name="Qblock408" parent="Node" unique_id=267879851 instance=ExtResource("4_bogsv")]
+position = Vector2(2440, -168)
+isBrick = true
+
+[node name="Qblock409" parent="Node" unique_id=138661066 instance=ExtResource("4_bogsv")]
+position = Vector2(2472, -168)
+isBrick = true
+
+[node name="Qblock410" parent="Node" unique_id=1305306398 instance=ExtResource("4_bogsv")]
+position = Vector2(2456, -168)
+isBrick = true
+
+[node name="Qblock411" parent="Node" unique_id=818466968 instance=ExtResource("4_bogsv")]
+position = Vector2(2488, -168)
+isBrick = true
+
+[node name="Qblock412" parent="Node" unique_id=388521466 instance=ExtResource("4_bogsv")]
+position = Vector2(2504, -168)
+isBrick = true
+
+[node name="Qblock413" parent="Node" unique_id=2074934800 instance=ExtResource("4_bogsv")]
+position = Vector2(2520, -168)
+isBrick = true
+
+[node name="Qblock414" parent="Node" unique_id=151775578 instance=ExtResource("4_bogsv")]
+position = Vector2(2552, -168)
+isBrick = true
+
+[node name="Qblock415" parent="Node" unique_id=309806902 instance=ExtResource("4_bogsv")]
+position = Vector2(2536, -168)
+isBrick = true
+
+[node name="Qblock416" parent="Node" unique_id=94372697 instance=ExtResource("4_bogsv")]
+position = Vector2(2568, -168)
 isBrick = true
 
 [node name="Qblock190" parent="Node" unique_id=1292277183 instance=ExtResource("4_bogsv")]

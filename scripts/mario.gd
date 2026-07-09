@@ -16,7 +16,7 @@ const common = preload("res://scripts/library.gd")
 @onready var timer: Timer = $Timer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-@onready var raycast_down: Area2D = $RayCastDown
+
 
 @export var hud: CanvasLayer
 
@@ -31,15 +31,20 @@ var isAccelPositive = 1
 var speedMultiplier = 0
 var speed = 0
 var facingRight = 1
+var direction
 
 
 #player status
 var dead = false
 var canJump = false
 var tempInvincible = false
+var isPiping = false
+
 var status = 0 # 0 smol, 1 big, #2 fire
 var coins = 0
 var score = 0
+
+
 @export var lives = 3
 
 # level stuff
@@ -47,7 +52,7 @@ var score = 0
 
 
 # level end stuff
-var levelFinish: bool = false
+var autoMove: bool = false
 var flagpoleEndReached: bool = false
 var stopZoneReached: bool = false
 
@@ -61,19 +66,19 @@ func apply_gravity(delta):
 func apply_run_multipliers():
 	if Input.is_action_pressed("run"):
 		speedMultiplier = 1.5
-		sprite.speed_scale = 1.8
+		sprite.speed_scale = 1.8 * direction
 	else:
-		sprite.speed_scale = 1
-		speedMultiplier = 1
+		sprite.speed_scale = 1 * direction
+		speedMultiplier = 1 
 
 
 func _physics_process(delta: float) -> void:
 	if not dead:
-		if (not is_on_floor() and not levelFinish):
+		if (not is_on_floor() and not autoMove):
 			apply_gravity(delta)
 			
 			
-		if levelFinish:
+		if autoMove:
 			velocity = Vector2.ZERO
 			if not flagpoleEndReached:
 				play_animation("hold")
@@ -90,10 +95,25 @@ func _physics_process(delta: float) -> void:
 		
 
 		
-		for body in raycast_down.get_overlapping_bodies():
-			print("no")
-			if body:
-				print("yup")
+		for body in $RayCastDown.get_overlapping_bodies():
+			if body and Input.is_action_just_pressed("down") and not isPiping:
+				print("down")
+				enter_pipe(body.connecting_level)
+		for body in $RayCastUp.get_overlapping_bodies():
+			if body and Input.is_action_just_pressed("up") and not isPiping:
+				print("up")
+				enter_pipe(body.connecting_level)
+		for body in $RayCastLeft.get_overlapping_bodies():
+			if body and Input.is_action_just_pressed("left") and not isPiping:
+				print("left")
+				enter_pipe(body)
+		for body in $RayCastRight.get_overlapping_bodies():
+			if body and Input.is_action_just_pressed("right") and not isPiping:
+				print("right")
+				enter_pipe(body.connecting_level)
+
+
+				
 
 		#run
 		apply_run_multipliers()
@@ -102,8 +122,23 @@ func _physics_process(delta: float) -> void:
 			cast_fireball()
 
 		if not game_manager.stopEverything:
+			sprite.position = Vector2.ZERO
 			move_and_slide()
+
+func enter_pipe(connecting_level):
+	print(connecting_level.name)
+	game_manager.stopEverything = true
+	common.play_audio(self,preload("res://assets/sound/sfx/pipepowerdown.wav"))
+	isPiping = true
+	var tween = create_tween()
+	tween.tween_property(sprite,"position",Vector2(0,50),1.0)
+	await common.wait(self,1.0)
+	common.get_game_manager(self).load_level(connecting_level)
+	isPiping = false
+	game_manager.stopEverything = false
+	sprite.position = Vector2.ZERO
 	
+
 
 func cast_fireball():
 		var spawned_fireball = fireball.instantiate()
@@ -143,6 +178,10 @@ func take_damage():
 			position.y -= 32
 		if status == 2:
 			status -= 1
+			game_manager.stopEverything = true
+			common.play_audio(self, preload("res://assets/sound/sfx/pipepowerdown.wav"))
+			await common.wait(self, 1.0)
+			game_manager.stopEverything = false
 
 func die():
 	status = 0
@@ -152,7 +191,7 @@ func die():
 
 	common.play_audio(self,preload("res://assets/sound/sfx/death.wav" ))
 	
-	common.get_level_manager(self).music.stop()
+	#common.get_level_manager(self).music.stop()
 
 	lives -= 1
 	await common.wait(self, 2.8)
@@ -160,7 +199,7 @@ func die():
 	resetMovement()
 	sprite.position = Vector2.ZERO
 	self.show()
-	dead = false
+	
 		
 func get_big():
 	add_score(1000, "lmao")
@@ -269,8 +308,7 @@ func _input(event: InputEvent) -> void:
 
 
 func move(delta):
-		var direction := Input.get_axis("left", "right")
-		
+		direction = Input.get_axis("left", "right")
 		#speed penalty when changing directions
 		if direction != 0:
 			if direction * speed < 0:
@@ -335,5 +373,6 @@ func resetMovement():
 	velocity = Vector2.ZERO
 	isJumping = false
 	flagpoleEndReached = false
-	levelFinish = false
+	autoMove = false
 	stopZoneReached = false
+	dead = false

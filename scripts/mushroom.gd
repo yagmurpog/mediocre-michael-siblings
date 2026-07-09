@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if isOneUp:
 		common.play_audio(self,preload("res://assets/sound/sfx/1up.wav"))
+		body.lives += 1
 	else:
 		body.get_big()
 	
