@@ -3,60 +3,21 @@
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/level_manager.gd" id="1_fqldq"]
 [ext_resource type="TileSet" uid="uid://b18f8j062gt0s" path="res://assets/main_tileset.tres" id="2_3ay3b"]
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="3_hppjq"]
+[ext_resource type="PackedScene" uid="uid://ccb2e3xyapnrt" path="res://scenes/levels/1-1.tscn" id="5_48ne7"]
+[ext_resource type="PackedScene" uid="uid://bv6wd5s2cbhac" path="res://scenes/gameplay_elements/star.tscn" id="6_6xh4u"]
+[ext_resource type="PackedScene" uid="uid://cnppx7s1luu35" path="res://scenes/gameplay_elements/qblock.tscn" id="7_7x1jh"]
+[ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="7_cyt5c"]
+[ext_resource type="PackedScene" uid="uid://ceur32oih8l8o" path="res://scenes/gameplay_elements/koopa_troopa.tscn" id="11_jmx14"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_owgeq"]
-[ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="12_78u6e"]
 [ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="13_cj4me"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dj21o"]
-friction = 0.0
-rough = true
-bounce = 6.25
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y56qp"]
-atlas = ExtResource("12_78u6e")
-region = Rect2(124, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sv52t"]
-atlas = ExtResource("12_78u6e")
-region = Rect2(142, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7exfm"]
-atlas = ExtResource("12_78u6e")
-region = Rect2(160, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qgoyv"]
-atlas = ExtResource("12_78u6e")
-region = Rect2(106, 8, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yl3ha"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y56qp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sv52t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7exfm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qgoyv")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
-size = Vector2(14, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0p7"]
-size = Vector2(6, 19)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8u72"]
+size = Vector2(20, 24)
 
 [node name="Level" type="Node2D" unique_id=1805487705]
 script = ExtResource("1_fqldq")
 start_pos = Vector2(-378, -11)
+music = ExtResource("11_owgeq")
 levelTime = 300
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1729556758]
@@ -65,7 +26,7 @@ format = 2
 layer_0/name = "Foreground"
 layer_0/tile_data = PackedInt32Array(-393236, 2293760, 24, -327700, 2293760, 25, -393235, 2359296, 24, -327699, 2359296, 25, -393234, 2359296, 24, -327698, 2359296, 25, -524285, 2293760, 24, -458749, 2293760, 25, -524284, 2359296, 24, -458748, 2359296, 25, -524283, 2424832, 24, -458747, 2424832, 25, -524269, 2293760, 24, -458733, 2293760, 25, -524268, 2359296, 24, -458732, 2359296, 25, -524267, 2424832, 24, -458731, 2424832, 25, -524255, 2293760, 24, -458719, 2293760, 25, -524254, 2359296, 24, -458718, 2359296, 25, -524253, 2424832, 24, -458717, 2424832, 25, -393233, 2424832, 24, -327697, 2424832, 25, -458706, 2293760, 24, -393170, 2293760, 25, -458705, 2359296, 24, -393169, 2359296, 25, -458704, 2424832, 24, -393168, 2424832, 25, -393146, 2293760, 24, -327610, 2293760, 25, -393145, 2359296, 24, -327609, 2359296, 25, -393144, 2424832, 24, -327608, 2424832, 25, -458664, 2293760, 24, -393128, 2293760, 25, -458663, 2359296, 24, -393127, 2359296, 25, -458662, 2424832, 24, -393126, 2424832, 25, -524180, 2293760, 24, -458644, 2293760, 25, -524179, 2359296, 24, -458643, 2359296, 25, -524178, 2424832, 24, -458642, 2424832, 25, -524170, 2293760, 24, -458634, 2293760, 25, -524169, 2359296, 24, -458633, 2359296, 25, -524168, 2424832, 24, -458632, 2424832, 25, -458623, 2293760, 24, -393087, 2293760, 25, -458622, 2359296, 24, -393086, 2359296, 25, -458621, 2424832, 24, -393085, 2424832, 25, -524144, 2293760, 24, -458608, 2293760, 25, -524143, 2359296, 24, -458607, 2359296, 25, -524142, 2424832, 24, -458606, 2424832, 25, -589668, 2293760, 24, -524132, 2293760, 25, -589667, 2359296, 24, -524131, 2359296, 25, -589666, 2424832, 24, -524130, 2424832, 25, -589657, 2293760, 24, -524121, 2293760, 25, -589656, 2359296, 24, -524120, 2359296, 25, -589655, 2424832, 24, -524119, 2424832, 25, -196655, 2621440, 24, -131119, 2621440, 25, -196654, 2686976, 24, -131118, 2686976, 25, -196653, 2752512, 24, -131117, 2752512, 25, -35, 2293760, 2, 65501, 2293760, 3, -34, 2359296, 2, 65502, 2359296, 3)
 layer_1/name = "Mid"
-layer_1/tile_data = PackedInt32Array(131065, 0, 0, 196601, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 131062, 0, 0, 131063, 0, 0, 131064, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131031, 0, 0, 196567, 0, 0, 131032, 0, 0, 196568, 0, 0, 131033, 0, 0, 196569, 0, 0, 131034, 0, 0, 196570, 0, 0, 131035, 0, 0, 196571, 0, 0, 131036, 0, 0, 196572, 0, 0, 131037, 0, 0, 196573, 0, 0, 131038, 0, 0, 196574, 0, 0, 131039, 0, 0, 196575, 0, 0, 131040, 0, 0, 196576, 0, 0, 131041, 0, 0, 196577, 0, 0, 131042, 0, 0, 196578, 0, 0, 131043, 0, 0, 196579, 0, 0, 131044, 0, 0, 196580, 0, 0, 131045, 0, 0, 196581, 0, 0, 131046, 0, 0, 196582, 0, 0, 131047, 0, 0, 196583, 0, 0, 131048, 0, 0, 196584, 0, 0, 131049, 0, 0, 196585, 0, 0, 131050, 0, 0, 196586, 0, 0, 131051, 0, 0, 196587, 0, 0, 131052, 0, 0, 196588, 0, 0, 131053, 0, 0, 196589, 0, 0, 131054, 0, 0, 196590, 0, 0, 131056, 0, 0, 196592, 0, 0, 131057, 0, 0, 196593, 0, 0, 131058, 0, 0, 196594, 0, 0, 196595, 0, 0, 196596, 0, 0, 131061, 0, 0, 196597, 0, 0, 196598, 0, 0, 196599, 0, 0, 196600, 0, 0, 131055, 0, 0, 196591, 0, 0, 131060, 0, 0, 131059, 0, 0, 131030, 0, 0, 196566, 0, 0, -12, 2424832, 2, 65524, 2424832, 3, 65525, 2490368, 3, -11, 2490368, 2)
+layer_1/tile_data = PackedInt32Array(131065, 0, 0, 196601, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 131062, 0, 0, 131063, 0, 0, 131064, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131031, 0, 0, 196567, 0, 0, 131032, 0, 0, 196568, 0, 0, 131033, 0, 0, 196569, 0, 0, 131034, 0, 0, 196570, 0, 0, 131035, 0, 0, 196571, 0, 0, 131036, 0, 0, 196572, 0, 0, 131037, 0, 0, 196573, 0, 0, 131038, 0, 0, 196574, 0, 0, 131039, 0, 0, 196575, 0, 0, 131040, 0, 0, 196576, 0, 0, 131041, 0, 0, 196577, 0, 0, 131042, 0, 0, 196578, 0, 0, 131043, 0, 0, 196579, 0, 0, 131044, 0, 0, 196580, 0, 0, 131045, 0, 0, 196581, 0, 0, 131046, 0, 0, 196582, 0, 0, 131047, 0, 0, 196583, 0, 0, 131048, 0, 0, 196584, 0, 0, 131049, 0, 0, 196585, 0, 0, 131050, 0, 0, 196586, 0, 0, 131051, 0, 0, 196587, 0, 0, 131052, 0, 0, 196588, 0, 0, 131053, 0, 0, 196589, 0, 0, 131054, 0, 0, 196590, 0, 0, 131056, 0, 0, 196592, 0, 0, 131057, 0, 0, 196593, 0, 0, 131058, 0, 0, 196594, 0, 0, 196595, 0, 0, 196596, 0, 0, 131061, 0, 0, 196597, 0, 0, 196598, 0, 0, 196599, 0, 0, 196600, 0, 0, 131055, 0, 0, 196591, 0, 0, 131060, 0, 0, 131059, 0, 0, 131030, 0, 0, 196566, 0, 0, -12, 2424832, 2, 65524, 2424832, 3, 65525, 2490368, 3, -11, 2490368, 2, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 131087, 0, 0, 131086, 0, 0, 131085, 0, 0, 131084, 0, 0, 131083, 0, 0, 131082, 0, 0, 131081, 0, 0, 131080, 0, 0, 131079, 0, 0, 131078, 0, 0, 131077, 0, 0, 131076, 0, 0, 131075, 0, 0, 131074, 0, 0, 131073, 0, 0, 131072, 0, 0, 196607, 0, 0, 196606, 0, 0, 196605, 0, 0, -10, 0, 0, 65526, 0, 0, -65523, 0, 0, 13, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65558, 0, 0, 65559, 0, 0, 65560, 0, 0, 65561, 0, 0, 131088, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131094, 0, 0, 131095, 0, 0, 131096, 0, 0, 131097, 0, 0, 131098, 0, 0, 131099, 0, 0, 131100, 0, 0, 131101, 0, 0, 65562, 0, 0, 65563, 0, 0, 65564, 0, 0, 65565, 0, 0, 65566, 0, 0, 131102, 0, 0, 65567, 0, 0, 131103, 0, 0, 65568, 0, 0, 131104, 0, 0, 65569, 0, 0, 131105, 0, 0, 65570, 0, 0, 131106, 0, 0, 65571, 0, 0, 131107, 0, 0, 65572, 0, 0, 131108, 0, 0, 65573, 0, 0, 131109, 0, 0, 65574, 0, 0, 131110, 0, 0, 65575, 0, 0, 131111, 0, 0, 65576, 0, 0, 131112, 0, 0, 65577, 0, 0, 131113, 0, 0, 65578, 0, 0, 131114, 0, 0, 65579, 0, 0, 131115, 0, 0, 65580, 0, 0, 131116, 0, 0, 65581, 0, 0, 131117, 0, 0, 65582, 0, 0, 131118, 0, 0, 65583, 0, 0, 131119, 0, 0, 65584, 0, 0, 131120, 0, 0, 65585, 0, 0, 131121, 0, 0, 65586, 0, 0, 131122, 0, 0, 65587, 0, 0, 131123, 0, 0, 65588, 0, 0, 131124, 0, 0, 65589, 0, 0, 131125, 0, 0, 65590, 0, 0, 131126, 0, 0)
 layer_2/name = "Background"
 layer_2/tile_data = PackedInt32Array(65524, 2818048, 2, -11, 2883584, 2, 65525, 2818048, 3, 65526, 2949120, 2, 65531, 2293760, 4, 65532, 2359296, 4, 65533, 2424832, 4, 65521, 2359296, 4, 65522, 2359296, 4, 65523, 2424832, 4, 65520, 2359296, 4, 65519, 2293760, 4, 20, 2818048, 2, -65515, 2818048, 2, 21, 2818048, 3, -131050, 2883584, 2, -65514, 2818048, 3, 22, 2883584, 3, -65513, 2949120, 2, 23, 2818048, 3, 24, 2949120, 2, 13, 2293760, 4, 14, 2359296, 4, 15, 2359296, 4, 16, 2424832, 4, 31, 2293760, 4, 32, 2359296, 4, 33, 2359296, 4, 34, 2359296, 4, 35, 2424832, 4, 36, 2818048, 2, -65499, 2883584, 2, 38, 2949120, 2, 37, 2818048, 3, 43, 2293760, 4, 44, 2359296, 4, 45, 2424832, 4, 62, 2293760, 4, 63, 2359296, 4, 64, 2359296, 4, 65, 2424832, 4, 70, 2818048, 2, -65465, 2818048, 2, 71, 2818048, 3, -131000, 2883584, 2, -65464, 2818048, 3, 72, 2883584, 3, -65463, 2949120, 2, 73, 2818048, 3, 74, 2949120, 2, 80, 2293760, 4, 82, 2359296, 4, 83, 2359296, 4, 81, 2359296, 4, 84, 2424832, 4, 85, 2818048, 2, 87, 2949120, 2, 86, 2818048, 3, -65450, 2883584, 2, 92, 2293760, 4, 93, 2359296, 4, 94, 2424832, 4, 111, 2359296, 4, 112, 2359296, 4, 117, 2818048, 2, -65418, 2818048, 2, -130953, 2883584, 2, -65416, 2949120, 2, 121, 2949120, 2, 118, 2818048, 3, -65417, 2818048, 3, 120, 2818048, 3, 119, 2883584, 3, 132, 2424832, 4, 133, 2818048, 2, 135, 2949120, 2, -65402, 2883584, 2, 134, 2818048, 3, 140, 2293760, 4, 141, 2359296, 4, 142, 2424832, 4, 165, 2818048, 2, -65370, 2818048, 2, 166, 2818048, 3, -130905, 2883584, 2, -65369, 2818048, 3, 167, 2883584, 3, -65368, 2949120, 2, 168, 2818048, 3, 169, 2949120, 2, -130897, 720896, 0, -65361, 851968, 0, 175, 851968, 0, -261968, 720896, 0, -196432, 786432, 0, -130896, 720896, 1, -65360, 851968, 0, 176, 851968, 0, -261967, 720896, 0, -196431, 851968, 0, -130895, 720896, 1, -65359, 786432, 1, 177, 851968, 1, -261966, 720896, 0, -196430, 917504, 0, -130894, 720896, 1, -65358, 851968, 0, 178, 851968, 0, -130893, 720896, 0, -65357, 851968, 0, 179, 851968, 0, -33, 2818048, 2, 65502, 2818048, 2, -65568, 2818048, 2, -65566, 2949120, 2, -29, 2949120, 2, 65508, 2949120, 2, 65503, 2883584, 3, 65504, 2883584, 3, 65505, 2883584, 3, 65506, 2949120, 3, 65507, 2883584, 3, -30, 2883584, 3, -31, 2883584, 3, -32, 2818048, 3, -65567, 2883584, 3, -131103, 2883584, 2)
 
@@ -82,34 +43,51 @@ color = Color(0.36078432, 0.5803922, 0.9882353, 1)
 
 [node name="Gameplay Elements" type="Node" parent="TileMap" unique_id=424834768]
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=401832855]
-stream = ExtResource("11_owgeq")
-autoplay = true
-bus = &"Music"
-parameters/looping = true
-
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=404355511]
-visible = false
-position = Vector2(-378, -11)
-collision_layer = 0
-mass = 0.001
-physics_material_override = SubResource("PhysicsMaterial_dj21o")
-gravity_scale = 0.63
-constant_force = Vector2(1, 0)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=2048376651]
-sprite_frames = SubResource("SpriteFrames_yl3ha")
-frame_progress = 0.19232573
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1842509340]
-shape = SubResource("RectangleShape2D_yl3ha")
-
-[node name="entrance" type="StaticBody2D" parent="." unique_id=2032374460]
-position = Vector2(-545, -8)
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1753720621]
+position = Vector2(-180, 2)
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("13_cj4me")
+connecting_level = ExtResource("5_48ne7")
+starting_position = Vector2(24.745, -74.59)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="entrance" unique_id=623768419]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_tx0p7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1714253430]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_t8u72")
+
+[node name="Goomba" parent="." unique_id=938895401 instance=ExtResource("7_cyt5c")]
+position = Vector2(-104, 10)
+
+[node name="Goomba2" parent="." unique_id=1854916507 instance=ExtResource("7_cyt5c")]
+position = Vector2(-87, 10)
+
+[node name="Goomba3" parent="." unique_id=1858808883 instance=ExtResource("7_cyt5c")]
+position = Vector2(-70, 10)
+
+[node name="Goomba4" parent="." unique_id=1746124073 instance=ExtResource("7_cyt5c")]
+position = Vector2(-53, 10)
+
+[node name="Goomba5" parent="." unique_id=1749758826 instance=ExtResource("7_cyt5c")]
+position = Vector2(-37, 10)
+
+[node name="Goomba6" parent="." unique_id=1218306887 instance=ExtResource("7_cyt5c")]
+position = Vector2(-20, 10)
+
+[node name="Goomba7" parent="." unique_id=190372698 instance=ExtResource("7_cyt5c")]
+position = Vector2(-3, 10)
+
+[node name="Goomba8" parent="." unique_id=1725209477 instance=ExtResource("7_cyt5c")]
+position = Vector2(14, 10)
+
+[node name="Goomba9" parent="." unique_id=290447931 instance=ExtResource("7_cyt5c")]
+position = Vector2(32, 10)
+
+[node name="Goomba10" parent="." unique_id=849679043 instance=ExtResource("7_cyt5c")]
+position = Vector2(49, 10)
+
+[node name="Qblock" parent="." unique_id=929953790 instance=ExtResource("7_7x1jh")]
+position = Vector2(-312, -24)
+itemInside = ExtResource("6_6xh4u")
+
+[node name="Koopa Troopa" parent="." unique_id=2120533170 instance=ExtResource("11_jmx14")]
+position = Vector2(-128, 0)

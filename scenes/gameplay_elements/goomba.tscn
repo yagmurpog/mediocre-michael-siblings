@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b470yb5el4vgl" path="res://scripts/goomba.gd" id="1_jke6y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jke6y"]
-size = Vector2(14, 11.5)
+size = Vector2(14, 8.75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h2yge"]
 atlas = ExtResource("1_7ti76")
@@ -71,8 +71,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwfim"]
-size = Vector2(8, 5)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m0ba7"]
+b = Vector2(0, -12)
 
 [sub_resource type="Animation" id="Animation_lwfim"]
 length = 0.001
@@ -156,7 +156,8 @@ _data = {
 }
 
 [node name="Goomba" type="CharacterBody2D" unique_id=938895401]
-collision_layer = 17
+collision_layer = 16
+collision_mask = 529
 script = ExtResource("1_jke6y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1806882870]
@@ -173,20 +174,23 @@ collision_layer = 5
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1086760270]
+position = Vector2(0, 1.375)
 shape = SubResource("RectangleShape2D_jke6y")
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=781196283]
 target_position = Vector2(-13, 0)
+collision_mask = 17
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=610184505]
 target_position = Vector2(13, 0)
+collision_mask = 17
 
 [node name="StompZone" type="Area2D" parent="." unique_id=1604264618]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompZone" unique_id=1383999105]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_lwfim")
+position = Vector2(0, -6)
+shape = SubResource("SegmentShape2D_m0ba7")
 debug_color = Color(0.9532129, 2.0214916e-06, 0.55719656, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2050804245]

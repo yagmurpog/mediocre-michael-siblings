@@ -12,63 +12,22 @@
 [ext_resource type="PackedScene" uid="uid://71q1d4mwt0xq" path="res://scenes/gameplay_elements/fire_flower.tscn" id="9_e6vbh"]
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="10_meg7t"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_j7ukw"]
-[ext_resource type="Texture2D" uid="uid://ht4kmb1f2b32" path="res://assets/items.png" id="12_6m1jm"]
+[ext_resource type="PackedScene" uid="uid://bv6wd5s2cbhac" path="res://scenes/gameplay_elements/star.tscn" id="13_yu1gn"]
 [ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="14_yu1gn"]
-[ext_resource type="PackedScene" uid="uid://ksmx2li6kweo" path="res://scenes/levels/1-1-sub.tscn" id="15_mdmbe"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dj21o"]
-friction = 0.0
-rough = true
-bounce = 6.25
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y56qp"]
-atlas = ExtResource("12_6m1jm")
-region = Rect2(124, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sv52t"]
-atlas = ExtResource("12_6m1jm")
-region = Rect2(142, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7exfm"]
-atlas = ExtResource("12_6m1jm")
-region = Rect2(160, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qgoyv"]
-atlas = ExtResource("12_6m1jm")
-region = Rect2(106, 8, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yl3ha"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y56qp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sv52t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7exfm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qgoyv")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
-size = Vector2(14, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0p7"]
-size = Vector2(28, 8)
+size = Vector2(12, 12)
 
 [node name="Level" type="Node2D" unique_id=1805487705]
 script = ExtResource("1_yu1gn")
-start_pos = Vector2(479, -100)
-next_level = ExtResource("2_3gwmd")
+start_pos = Vector2(-411.77744, -17.991348)
+music = ExtResource("11_j7ukw")
 levelTime = 3000
 levelName = "one dash one"
+
+[node name="Node2D2" type="Node2D" parent="." unique_id=1055818883]
+position = Vector2(2192.0002, -19)
+scale = Vector2(4.129857, 3.640728)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1729556758]
 tile_set = ExtResource("2_mdmbe")
@@ -116,6 +75,7 @@ position = Vector2(2688, 0)
 
 [node name="Stop Zone" parent="TileMap/Gameplay Elements" unique_id=1972053115 instance=ExtResource("8_xu4js")]
 position = Vector2(2776, 0)
+next_level = ExtResource("2_3gwmd")
 
 [node name="Qblock6" parent="TileMap/Gameplay Elements" unique_id=549737377 instance=ExtResource("4_cj1vq")]
 position = Vector2(824, -40)
@@ -381,27 +341,8 @@ isBrick = true
 [node name="LevelTimer" type="Timer" parent="." unique_id=397904098]
 autostart = true
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=401832855]
-stream = ExtResource("11_j7ukw")
-autoplay = true
-bus = &"Music"
-parameters/looping = true
-
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=404355511]
-visible = false
+[node name="Star" parent="." unique_id=652291922 instance=ExtResource("13_yu1gn")]
 position = Vector2(-378, -11)
-collision_layer = 0
-mass = 0.001
-physics_material_override = SubResource("PhysicsMaterial_dj21o")
-gravity_scale = 0.63
-constant_force = Vector2(1, 0)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D" unique_id=2048376651]
-sprite_frames = SubResource("SpriteFrames_yl3ha")
-frame_progress = 0.19232573
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1842509340]
-shape = SubResource("RectangleShape2D_yl3ha")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=933190078]
 position = Vector2(-411.77744, -17.991348)
@@ -411,8 +352,7 @@ position = Vector2(479, -43)
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("14_yu1gn")
-connecting_level = ExtResource("15_mdmbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2054922892]
-position = Vector2(1, -6)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_tx0p7")

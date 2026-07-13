@@ -12,6 +12,9 @@ extends CanvasLayer
 @onready var lives_splash_label: Label = $SplashControl/SplashLivesLabel
 
 
+func _process(delta: float) -> void:
+	self.scale *= get_tree().root.content_scale_factor
+
 
 func _ready() -> void:
 	player_label.text = "michael"

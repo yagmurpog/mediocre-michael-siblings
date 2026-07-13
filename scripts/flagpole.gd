@@ -5,9 +5,9 @@ extends Node2D
 const common = preload("res://scripts/library.gd")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	body.levelFinish = true
+	body.autoMove = true
 	animation_player.play("flag_down")
-	common.get_level_manager(self).music.stop()
+	common.get_game_manager(self).musicStream.stop()
 	common.play_audio(self,preload("res://assets/sound/sfx/flagpole.wav"))
 	await common.wait(self,1.3)
 	common.play_audio(self,preload("res://assets/sound/music/6.ogg"))

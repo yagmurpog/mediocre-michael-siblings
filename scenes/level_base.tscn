@@ -50,12 +50,12 @@ first_level = ExtResource("2_8n3nq")
 
 [node name="mario" parent="." unique_id=1038047173 node_paths=PackedStringArray("hud") instance=ExtResource("1_58o6h")]
 unique_name_in_owner = true
-position = Vector2(-428, -5)
+position = Vector2(-432, -432)
 hud = NodePath("../HUD")
 accel = 110
 
 [node name="Camera2D" type="Camera2D" parent="mario" unique_id=712760822]
-zoom = Vector2(3, 3)
+zoom = Vector2(2.8, 2.8)
 limit_bottom = 47
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -65,6 +65,7 @@ drag_vertical_enabled = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=885433742 node_paths=PackedStringArray("player_label", "score_label")]
 unique_name_in_owner = true
+follow_viewport_scale = 13.195
 script = ExtResource("2_8rhjg")
 player_label = NodePath("Control/PlayerLabel")
 score_label = NodePath("Control/PlayerLabel/ScoreLabel")
@@ -188,5 +189,10 @@ color = Color(0, 0, 0, 1)
 
 [node name="LevelTimer" type="Timer" parent="." unique_id=1972094625]
 autostart = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=74191156]
+bus = &"Music"
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=593930359]
 
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]

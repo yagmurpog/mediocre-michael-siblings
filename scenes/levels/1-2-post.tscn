@@ -11,6 +11,7 @@
 [node name="Level" type="Node2D" unique_id=1748693938]
 script = ExtResource("1_lx6mx")
 next_level = ExtResource("2_uk7yo")
+music = ExtResource("4_uk7yo")
 levelTime = 100
 autoWalkLevel = true
 
@@ -33,12 +34,6 @@ scale = Vector2(4.129857, 3.640728)
 color = Color(0.36078432, 0.5803922, 0.9882353, 1)
 
 [node name="Instakill Zone" parent="TileMap" unique_id=530235541 instance=ExtResource("3_bdoqj")]
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1466431710]
-stream = ExtResource("4_uk7yo")
-autoplay = true
-bus = &"Music"
-parameters/looping = true
 
 [node name="Flagpole" parent="." unique_id=2050015406 instance=ExtResource("5_bdoqj")]
 position = Vector2(16, 0)

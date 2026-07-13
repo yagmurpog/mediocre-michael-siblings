@@ -14,8 +14,9 @@ const common = preload("res://scripts/library.gd")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var timer: Timer = $Timer
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var star_timer: Timer = $StarTimer
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 @export var hud: CanvasLayer
@@ -39,6 +40,8 @@ var dead = false
 var canJump = false
 var tempInvincible = false
 var isPiping = false
+var hasStar = false
+
 
 var status = 0 # 0 smol, 1 big, #2 fire
 var coins = 0
@@ -59,17 +62,6 @@ var stopZoneReached: bool = false
 var jump_modifier: float
 
 
-func apply_gravity(delta):
-	jump_modifier = 0.5 if Input.is_action_pressed("jump") and isJumping else 1.0
-	velocity += get_gravity() * delta * jump_modifier
-
-func apply_run_multipliers():
-	if Input.is_action_pressed("run"):
-		speedMultiplier = 1.5
-		sprite.speed_scale = 1.8 * direction
-	else:
-		sprite.speed_scale = 1 * direction
-		speedMultiplier = 1 
 
 
 func _physics_process(delta: float) -> void:
@@ -94,26 +86,23 @@ func _physics_process(delta: float) -> void:
 				move(delta)
 		
 
-		
 		for body in $RayCastDown.get_overlapping_bodies():
+			print(body.connecting_level)
 			if body and Input.is_action_just_pressed("down") and not isPiping:
-				print("down")
-				enter_pipe(body.connecting_level)
+				enter_pipe(body.connecting_level,body.starting_position,Vector2(0, 50))
 		for body in $RayCastUp.get_overlapping_bodies():
 			if body and Input.is_action_just_pressed("up") and not isPiping:
 				print("up")
-				enter_pipe(body.connecting_level)
+				enter_pipe(body.connecting_level,body.starting_position,Vector2(0, -50))
 		for body in $RayCastLeft.get_overlapping_bodies():
 			if body and Input.is_action_just_pressed("left") and not isPiping:
 				print("left")
-				enter_pipe(body)
+				enter_pipe(body,body.starting_position,Vector2(-50, 0))
 		for body in $RayCastRight.get_overlapping_bodies():
 			if body and Input.is_action_just_pressed("right") and not isPiping:
 				print("right")
-				enter_pipe(body.connecting_level)
+				enter_pipe(body.connecting_level,body.starting_position,Vector2(50, 0))
 
-
-				
 
 		#run
 		apply_run_multipliers()
@@ -125,20 +114,35 @@ func _physics_process(delta: float) -> void:
 			sprite.position = Vector2.ZERO
 			move_and_slide()
 
-func enter_pipe(connecting_level):
-	print(connecting_level.name)
+
+func apply_gravity(delta):
+	jump_modifier = 0.5 if Input.is_action_pressed("jump") and isJumping else 1.0
+	velocity += get_gravity() * delta * jump_modifier
+
+func apply_run_multipliers():
+	if Input.is_action_pressed("run"):
+		speedMultiplier = 1.5
+		sprite.speed_scale = 1.8 * direction
+	else:
+		sprite.speed_scale = 1 * direction
+		speedMultiplier = 1
+	
+
+
+func enter_pipe(connecting_level:Resource,starting_position:Vector2,targetPosition:Vector2):
+	sprite.z_index = 0
 	game_manager.stopEverything = true
-	common.play_audio(self,preload("res://assets/sound/sfx/pipepowerdown.wav"))
+	common.play_audio(self, preload("res://assets/sound/sfx/pipepowerdown.wav"))
 	isPiping = true
 	var tween = create_tween()
-	tween.tween_property(sprite,"position",Vector2(0,50),1.0)
-	await common.wait(self,1.0)
-	common.get_game_manager(self).load_level(connecting_level)
+	tween.tween_property(sprite, "position", targetPosition, 1.0)
+	await common.wait(self, 1.0)
+	common.get_game_manager(self).load_level(connecting_level,starting_position)
 	isPiping = false
 	game_manager.stopEverything = false
 	sprite.position = Vector2.ZERO
+	sprite.z_index = 3
 	
-
 
 func cast_fireball():
 		var spawned_fireball = fireball.instantiate()
@@ -148,8 +152,11 @@ func cast_fireball():
 		add_sibling(spawned_fireball)
 
 
-func take_damage():
-	if tempInvincible:
+func take_damage(caller):
+	if tempInvincible or hasStar:
+		if hasStar:
+			caller.fire_die()
+			add_score(100,"100")
 		print("incinvle")
 	else:
 		tempInvincible = true
@@ -189,13 +196,15 @@ func die():
 	play_animation("die")
 	animation_player.play("die")
 
-	common.play_audio(self,preload("res://assets/sound/sfx/death.wav" ))
+	common.play_audio(self, preload("res://assets/sound/sfx/death.wav"))
 	
-	#common.get_level_manager(self).music.stop()
+	game_manager.musicStream.stop()
 
 	lives -= 1
 	await common.wait(self, 2.8)
-	await game_manager.show_splash(game_manager.first_level)
+	position = game_manager.loaded_level.start_pos
+	await game_manager.show_splash(game_manager.loaded_level_resource)
+	
 	resetMovement()
 	sprite.position = Vector2.ZERO
 	self.show()
@@ -344,7 +353,7 @@ func auto_move(delta):
 
 
 ## display a text where the player is
-func add_score(amount, text):
+func add_score(amount:int, text:String):
 	var score_text = score_text_template.instantiate()
 	score_text.text = text
 	score_text.position = position
@@ -376,3 +385,10 @@ func resetMovement():
 	autoMove = false
 	stopZoneReached = false
 	dead = false
+
+
+func _on_star_timer_timeout() -> void:
+	hasStar = false
+	game_manager.play_level_music()
+	animation_player.stop()
+	sprite.self_modulate = Color.WHITE

@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if canDie:
-		body.take_damage()
+		body.take_damage(self)
 	
 
 func _on_stomp_zone_body_entered(body: Node2D) -> void:
