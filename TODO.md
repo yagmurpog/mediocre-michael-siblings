@@ -1,2 +1,1 @@
-- add star
 - make a pause menu

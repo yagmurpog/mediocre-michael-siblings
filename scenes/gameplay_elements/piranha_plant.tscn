@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://k2o4o2xr3uxe"]
+
+[ext_resource type="Script" uid="uid://clttmjsfh5hqe" path="res://scripts/piranha_plant.gd" id="1_ool74"]
+[ext_resource type="Texture2D" uid="uid://bofht3w876lfq" path="res://assets/enemies.png" id="2_kefae"]
+
+[sub_resource type="Animation" id="Animation_a5rnb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eaa0b"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_fqldq"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 24), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5rnb"]
+_data = {
+&"RESET": SubResource("Animation_a5rnb"),
+&"appear": SubResource("Animation_eaa0b"),
+&"disappear": SubResource("Animation_fqldq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d12qr"]
+size = Vector2(4, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5rnb"]
+atlas = ExtResource("2_kefae")
+region = Rect2(0, 138, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqldq"]
+atlas = ExtResource("2_kefae")
+region = Rect2(18, 138, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yl3ha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5rnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqldq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0p7"]
+size = Vector2(8, 20)
+
+[node name="Piranha Plant" type="CharacterBody2D" unique_id=1063189141]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_ool74")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1017851934]
+libraries/ = SubResource("AnimationLibrary_a5rnb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2024040689]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_d12qr")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1313580377]
+position = Vector2(1, 24)
+
+[node name="BlockageCheck" type="Area2D" parent="Node2D" unique_id=1369135533]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/BlockageCheck" unique_id=1295927029]
+position = Vector2(0, -21)
+shape = SubResource("RectangleShape2D_yl3ha")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" unique_id=829929582]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_yl3ha")
+autoplay = "default"
+frame_progress = 0.013589677
+
+[node name="KillZone" type="Area2D" parent="Node2D" unique_id=1928344060]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/KillZone" unique_id=1573778581]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_tx0p7")
+
+[node name="Timer" type="Timer" parent="." unique_id=903982982]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="Node2D/KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

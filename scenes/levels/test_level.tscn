@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/level_manager.gd" id="1_fqldq"]
 [ext_resource type="TileSet" uid="uid://b18f8j062gt0s" path="res://assets/main_tileset.tres" id="2_3ay3b"]
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="3_hppjq"]
-[ext_resource type="PackedScene" uid="uid://ccb2e3xyapnrt" path="res://scenes/levels/1-1.tscn" id="5_48ne7"]
 [ext_resource type="PackedScene" uid="uid://bv6wd5s2cbhac" path="res://scenes/gameplay_elements/star.tscn" id="6_6xh4u"]
 [ext_resource type="PackedScene" uid="uid://cnppx7s1luu35" path="res://scenes/gameplay_elements/qblock.tscn" id="7_7x1jh"]
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="7_cyt5c"]
+[ext_resource type="PackedScene" uid="uid://k2o4o2xr3uxe" path="res://scenes/gameplay_elements/piranha_plant.tscn" id="10_jmx14"]
 [ext_resource type="PackedScene" uid="uid://ceur32oih8l8o" path="res://scenes/gameplay_elements/koopa_troopa.tscn" id="11_jmx14"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_owgeq"]
+[ext_resource type="PackedScene" uid="uid://71q1d4mwt0xq" path="res://scenes/gameplay_elements/fire_flower.tscn" id="13_a5rnb"]
 [ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="13_cj4me"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8u72"]
@@ -48,7 +49,6 @@ position = Vector2(-180, 2)
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("13_cj4me")
-connecting_level = ExtResource("5_48ne7")
 starting_position = Vector2(24.745, -74.59)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1714253430]
@@ -90,4 +90,14 @@ position = Vector2(-312, -24)
 itemInside = ExtResource("6_6xh4u")
 
 [node name="Koopa Troopa" parent="." unique_id=2120533170 instance=ExtResource("11_jmx14")]
-position = Vector2(-128, 0)
+position = Vector2(-127, 0)
+
+[node name="Piranha Plant" parent="." unique_id=1063189141 instance=ExtResource("10_jmx14")]
+position = Vector2(-545, -28)
+
+[node name="Fire Flower" parent="." unique_id=2103866506 instance=ExtResource("13_a5rnb")]
+position = Vector2(-361, 7)
+
+[node name="Qblock2" parent="." unique_id=2002116810 instance=ExtResource("7_7x1jh")]
+position = Vector2(-408, -24)
+isBrick = true

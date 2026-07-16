@@ -8,3 +8,5 @@ const common = preload("res://scripts/library.gd")
 @export var levelTime: int
 @export var levelName: String = "my epic level"
 @export var autoWalkLevel: bool = false
+
+

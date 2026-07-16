@@ -7,7 +7,6 @@ const brickParticles: Resource = preload("uid://mb2bx1rfnovl")
 @export var isInvinsible = false
 
 
-
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var timer: Timer = $Timer
@@ -27,27 +26,25 @@ func _ready() -> void:
 			audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
 	if isInvinsible:
 		sprite.hide()
-		collision_shape_2d.set_deferred("disabled",true)
+		collision_shape_2d.set_deferred("disabled", true)
 	if itemInside:
 		audio_stream_player.stream = preload("res://assets/sound/sfx/item.wav")
 	
 
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if not isHit:
-		hit(body)
+		if not body.is_on_floor():
+			hit(body)
 	else:
-		common.play_audio(self,preload("res://assets/sound/sfx/bump.wav"))
+		common.play_audio(self, preload("res://assets/sound/sfx/bump.wav"))
 		
 
 func hit(body):
 	if isInvinsible:
 		sprite.show()
-		collision_shape_2d.set_deferred("disabled",false)
+		collision_shape_2d.set_deferred("disabled", false)
 		
 	for stuff_above in hit_zone.get_overlapping_bodies():
-			
 		print(stuff_above.name)
 		if stuff_above.get_collision_layer() == (1 << 4) | (1 << 0):
 			print("yup	")
@@ -56,12 +53,11 @@ func hit(body):
 			stuff_above.velocity.y -= 150
 
 	if itemInside:
-			
 		var thing = itemInside.instantiate()
 			
 		if thing.name == "Coin":
 			thing.isSpawnedByBlock = true
-			body.increase_coin(1,self)
+			body.increase_coin(1, self)
 			audio_stream_player.stream = preload("res://assets/sound/sfx/bump.wav")
 			
 		add_sibling(thing)
@@ -79,20 +75,36 @@ func hit(body):
 			body.add_score(50, "50")
 			audio_stream_player.stream = preload("res://assets/sound/sfx/brick.wav")
 
+			spawn_particles(common.get_theme(self))
 
 			timer.start()
-			common.play_audio(self,preload("res://assets/sound/sfx/brick.wav"))
+			common.play_audio(self, preload("res://assets/sound/sfx/brick.wav"))
 			
-			var brickParticle = brickParticles.instantiate()
-			brickParticle.emitting = true
-			add_sibling(brickParticle)
-			brickParticle.position = global_position
+			
 		audio_stream_player.play()
 
 
 func _on_timer_timeout() -> void:
 	queue_free()
 	pass
+
+func spawn_particles(theme: common.theme):
+	var brickParticle = brickParticles.instantiate()
+	brickParticle.emitting = true
+
+	# sorry for magic numbers :(
+	# these point to specific regions in items.png
+	match theme:
+		common.theme.GROUND:
+			brickParticle.texture.region = Rect2(180,26,8,8)
+		common.theme.UNDERGROUND:
+			brickParticle.texture.region = Rect2(180,134,8,8)
+		common.theme.CASTLE:
+			brickParticle.texture.region = Rect2(180,242,8,8)
+
+
+	add_sibling(brickParticle)
+	brickParticle.position = global_position
 
 
 func setAnimation():

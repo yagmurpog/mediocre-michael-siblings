@@ -21,9 +21,13 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		
 	if ray_cast_right.is_colliding():
+		if shellMoving:
+			common.play_audio(self,preload("res://assets/sound/sfx/bump.wav"))
 		direction = -1
 
 	if ray_cast_left.is_colliding():
+		if shellMoving:
+			common.play_audio(self,preload("res://assets/sound/sfx/bump.wav"))
 		direction = 1
 		
 	if direction > 0:

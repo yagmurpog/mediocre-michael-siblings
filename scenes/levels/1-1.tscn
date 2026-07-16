@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_j7ukw"]
 [ext_resource type="PackedScene" uid="uid://bv6wd5s2cbhac" path="res://scenes/gameplay_elements/star.tscn" id="13_yu1gn"]
 [ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="14_yu1gn"]
+[ext_resource type="PackedScene" uid="uid://ksmx2li6kweo" path="res://scenes/levels/1-1-sub.tscn" id="15_mdmbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tx0p7"]
 size = Vector2(12, 12)
@@ -352,6 +353,7 @@ position = Vector2(479, -43)
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("14_yu1gn")
+connecting_level = ExtResource("15_mdmbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2054922892]
 position = Vector2(1, 0)
