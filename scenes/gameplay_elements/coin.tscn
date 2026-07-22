@@ -164,8 +164,13 @@ _data = {
 &"block": SubResource("Animation_kfxoj")
 }
 
-[node name="Coin" type="Node2D" unique_id=1064555762]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ha"]
+size = Vector2(10, 14)
+
+[node name="Coin" type="CharacterBody2D" unique_id=2009650804]
 z_index = -1
+collision_layer = 1024
+collision_mask = 0
 script = ExtResource("1_0t63x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1707810691]
@@ -186,5 +191,9 @@ libraries/ = SubResource("AnimationLibrary_jsmju")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1753583154]
 stream = ExtResource("4_ikash")
 bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=131687833]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_yl3ha")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

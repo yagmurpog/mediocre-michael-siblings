@@ -62,11 +62,9 @@ var stopZoneReached: bool = false
 var jump_modifier: float
 
 
-
-
 func _physics_process(delta: float) -> void:
 	if not dead:
-		if (not is_on_floor() and not autoMove):
+		if (not is_on_floor() and not autoMove and not game_manager.stopEverything):
 			apply_gravity(delta)
 			
 			
@@ -87,21 +85,18 @@ func _physics_process(delta: float) -> void:
 		
 
 		for body in $RayCastDown.get_overlapping_bodies():
-			print(body.connecting_level)
-			if body and Input.is_action_just_pressed("down") and not isPiping:
-				enter_pipe(body.connecting_level,body.starting_position,Vector2(0, 50))
+			if body and (Input.is_action_just_pressed("down") or autoMove) and not isPiping:
+				enter_pipe(body.connecting_level, body.starting_position, Vector2(0, 50))
 		for body in $RayCastUp.get_overlapping_bodies():
-			if body and Input.is_action_just_pressed("up") and not isPiping:
-				print("up")
-				enter_pipe(body.connecting_level,body.starting_position,Vector2(0, -50))
+			if body and (Input.is_action_just_pressed("up") or autoMove) and not isPiping:
+				enter_pipe(body.connecting_level, body.starting_position, Vector2(0, -50))
 		for body in $RayCastLeft.get_overlapping_bodies():
-			if body and Input.is_action_just_pressed("left") and not isPiping:
-				print("left")
-				enter_pipe(body,body.starting_position,Vector2(-50, 0))
+			if body and (Input.is_action_just_pressed("left") or autoMove) and not isPiping:
+				enter_pipe(body, body.starting_position, Vector2(-50, 0))
 		for body in $RayCastRight.get_overlapping_bodies():
-			if body and Input.is_action_just_pressed("right") and not isPiping:
-				print("right")
-				enter_pipe(body.connecting_level,body.starting_position,Vector2(50, 0))
+			if body and (Input.is_action_just_pressed("right") or autoMove) and not isPiping:
+		
+				enter_pipe(body.connecting_level, body.starting_position, Vector2(50, 0))
 
 
 		#run
@@ -128,8 +123,7 @@ func apply_run_multipliers():
 		speedMultiplier = 1
 	
 
-
-func enter_pipe(connecting_level:Resource,starting_position:Vector2,targetPosition:Vector2):
+func enter_pipe(connecting_level: Resource, starting_position: Vector2, targetPosition: Vector2):
 	sprite.z_index = 0
 	game_manager.stopEverything = true
 	common.play_audio(self, preload("res://assets/sound/sfx/pipepowerdown.wav"))
@@ -137,7 +131,7 @@ func enter_pipe(connecting_level:Resource,starting_position:Vector2,targetPositi
 	var tween = create_tween()
 	tween.tween_property(sprite, "position", targetPosition, 1.0)
 	await common.wait(self, 1.0)
-	common.get_game_manager(self).load_level(connecting_level,starting_position)
+	common.get_game_manager(self).load_level(connecting_level, starting_position)
 	isPiping = false
 	game_manager.stopEverything = false
 	sprite.position = Vector2.ZERO
@@ -156,8 +150,7 @@ func take_damage(caller):
 	if tempInvincible or hasStar:
 		if hasStar:
 			caller.fire_die()
-			add_score(100,"100")
-		print("incinvle")
+			add_score(100, "100")
 	else:
 		tempInvincible = true
 		timer.start()
@@ -211,6 +204,7 @@ func die():
 	
 		
 func get_big():
+	game_manager.stopEverything = true
 	add_score(1000, "lmao")
 
 	common.play_audio(self, preload("res://assets/sound/sfx/powerup.wav"))
@@ -227,7 +221,7 @@ func get_big():
 	sprite.offset.y = -8
 
 	sprite.play("get_big")
-	game_manager.stopEverything = true
+	
 	await common.wait(self, 1.0)
 	game_manager.stopEverything = false
 	
@@ -353,7 +347,7 @@ func auto_move(delta):
 
 
 ## display a text where the player is
-func add_score(amount:int, text:String):
+func add_score(amount: int, text: String):
 	var score_text = score_text_template.instantiate()
 	score_text.text = text
 	score_text.position = position

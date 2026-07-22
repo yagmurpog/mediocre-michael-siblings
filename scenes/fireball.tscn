@@ -24,6 +24,18 @@ region = Rect2(200, 54, 8, 8)
 atlas = ExtResource("2_cb14k")
 region = Rect2(210, 54, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb14k"]
+atlas = ExtResource("2_cb14k")
+region = Rect2(180, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kba2"]
+atlas = ExtResource("2_cb14k")
+region = Rect2(198, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43lgj"]
+atlas = ExtResource("2_cb14k")
+region = Rect2(216, 64, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_yc10j"]
 animations = [{
 "frames": [{
@@ -42,6 +54,20 @@ animations = [{
 "loop": 1,
 "name": &"default",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb14k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kba2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43lgj")
+}],
+"loop": 1,
+"name": &"explode",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3eg"]
@@ -57,8 +83,9 @@ script = ExtResource("1_1gl40")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2025992268]
 sprite_frames = SubResource("SpriteFrames_yc10j")
+animation = &"explode"
 autoplay = "default"
-frame_progress = 0.8019154
+frame_progress = 0.73323435
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1892927053]
 collision_layer = 0

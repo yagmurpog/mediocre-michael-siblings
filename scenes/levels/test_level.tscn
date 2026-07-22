@@ -3,17 +3,16 @@
 [ext_resource type="Script" uid="uid://bx08idpcuncvl" path="res://scripts/level_manager.gd" id="1_fqldq"]
 [ext_resource type="TileSet" uid="uid://b18f8j062gt0s" path="res://assets/main_tileset.tres" id="2_3ay3b"]
 [ext_resource type="PackedScene" uid="uid://d2ljs575o0lq3" path="res://scenes/instakill_zone.tscn" id="3_hppjq"]
+[ext_resource type="PackedScene" uid="uid://i7d6ruxo5adv" path="res://scenes/gameplay_elements/pipe_entrance.tscn" id="5_eaa0b"]
 [ext_resource type="PackedScene" uid="uid://bv6wd5s2cbhac" path="res://scenes/gameplay_elements/star.tscn" id="6_6xh4u"]
 [ext_resource type="PackedScene" uid="uid://cnppx7s1luu35" path="res://scenes/gameplay_elements/qblock.tscn" id="7_7x1jh"]
 [ext_resource type="PackedScene" uid="uid://cry15ghjvy27g" path="res://scenes/gameplay_elements/goomba.tscn" id="7_cyt5c"]
 [ext_resource type="PackedScene" uid="uid://k2o4o2xr3uxe" path="res://scenes/gameplay_elements/piranha_plant.tscn" id="10_jmx14"]
 [ext_resource type="PackedScene" uid="uid://ceur32oih8l8o" path="res://scenes/gameplay_elements/koopa_troopa.tscn" id="11_jmx14"]
 [ext_resource type="AudioStream" uid="uid://nyb13wpeqkxa" path="res://assets/sound/music/1.ogg" id="11_owgeq"]
+[ext_resource type="PackedScene" uid="uid://dohyg15bss0ih" path="res://scenes/gameplay_elements/coin.tscn" id="12_eaa0b"]
 [ext_resource type="PackedScene" uid="uid://71q1d4mwt0xq" path="res://scenes/gameplay_elements/fire_flower.tscn" id="13_a5rnb"]
-[ext_resource type="Script" uid="uid://dib1vtm3yp0b5" path="res://scripts/pipe_entrance.gd" id="13_cj4me"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8u72"]
-size = Vector2(20, 24)
+[ext_resource type="PackedScene" uid="uid://c5rwksexs65c8" path="res://scenes/levels/1-3.tscn" id="13_fqldq"]
 
 [node name="Level" type="Node2D" unique_id=1805487705]
 script = ExtResource("1_fqldq")
@@ -44,16 +43,8 @@ color = Color(0.36078432, 0.5803922, 0.9882353, 1)
 
 [node name="Gameplay Elements" type="Node" parent="TileMap" unique_id=424834768]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1753720621]
+[node name="Pipe Entrance" parent="." unique_id=973751096 instance=ExtResource("5_eaa0b")]
 position = Vector2(-180, 2)
-collision_layer = 256
-collision_mask = 0
-script = ExtResource("13_cj4me")
-starting_position = Vector2(24.745, -74.59)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1714253430]
-position = Vector2(-4, -2)
-shape = SubResource("RectangleShape2D_t8u72")
 
 [node name="Goomba" parent="." unique_id=938895401 instance=ExtResource("7_cyt5c")]
 position = Vector2(-104, 10)
@@ -101,3 +92,21 @@ position = Vector2(-361, 7)
 [node name="Qblock2" parent="." unique_id=2002116810 instance=ExtResource("7_7x1jh")]
 position = Vector2(-408, -24)
 isBrick = true
+
+[node name="Qblock3" parent="." unique_id=1898110712 instance=ExtResource("7_7x1jh")]
+position = Vector2(-472, -24)
+isBrick = true
+
+[node name="Qblock4" parent="." unique_id=1034578534 instance=ExtResource("7_7x1jh")]
+position = Vector2(-456, -24)
+isBrick = true
+
+[node name="Coin" parent="." unique_id=2009650804 instance=ExtResource("12_eaa0b")]
+position = Vector2(-472, -40)
+
+[node name="Coin2" parent="." unique_id=335744036 instance=ExtResource("12_eaa0b")]
+position = Vector2(-456, -40)
+
+[node name="Pipe Entrance2" parent="." unique_id=2000705655 instance=ExtResource("5_eaa0b")]
+position = Vector2(-544, -6)
+connecting_level = ExtResource("13_fqldq")

@@ -43,7 +43,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	for body2 in $KillZone.get_overlapping_bodies():
-		print(body2.get_collision_layer)
 		if body2.get_collision_layer() == (1 << 1):
 			if (shellMoving and shellOnly) or not shellOnly:
 				body.take_damage(self)
@@ -56,11 +55,9 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 
 		if body2.get_collision_layer() == (1 << 4) and (shellMoving and shellOnly):
 			body2.fire_die()
-			print("yup")
 		
 		
 func _on_stomp_zone_body_entered(body: Node2D) -> void:
-	print("hi :)")
 	if canDie and not shellMoving:
 		direction = 0
 		body.goomba_stomp(300)

@@ -47,7 +47,7 @@ size = Vector2(13, 7)
 size = Vector2(16, 10)
 
 [node name="Koopa Troopa" type="CharacterBody2D" unique_id=2120533170]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 17
 script = ExtResource("1_k01d8")
 
@@ -62,10 +62,12 @@ shape = SubResource("RectangleShape2D_muem4")
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=95406630]
 position = Vector2(-4, 4)
 target_position = Vector2(-13, 0)
+collision_mask = 17
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=1146548286]
 position = Vector2(3, 4)
 target_position = Vector2(13, 0)
+collision_mask = 17
 
 [node name="StompZone" type="Area2D" parent="." unique_id=717807815]
 collision_mask = 2

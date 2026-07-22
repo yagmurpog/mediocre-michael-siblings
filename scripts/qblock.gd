@@ -45,9 +45,10 @@ func hit(body):
 		collision_shape_2d.set_deferred("disabled", false)
 		
 	for stuff_above in hit_zone.get_overlapping_bodies():
-		print(stuff_above.name)
+		if stuff_above.get_collision_layer() == (1 << 10):
+			stuff_above.take()
+
 		if stuff_above.get_collision_layer() == (1 << 4) | (1 << 0):
-			print("yup	")
 			stuff_above.fire_die()
 		else:
 			stuff_above.velocity.y -= 150

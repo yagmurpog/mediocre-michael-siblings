@@ -17,7 +17,6 @@ const common = preload("res://scripts/library.gd")
 func _ready() -> void:
 	if isOneUp:
 		sprite.texture = oneUp
-	print("mushromd")
 
 func startMoving():
 	isMoving = true

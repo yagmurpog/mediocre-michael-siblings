@@ -21,5 +21,3 @@ static func get_game_manager(caller: Node):
 
 static func get_level_manager(caller: Node):
   return caller.get_node("/root/LevelBase/Level")
-
-

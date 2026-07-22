@@ -7,5 +7,4 @@ const common = preload("res://scripts/library.gd")
 
 func _on_body_entered(body: Node2D) -> void:
 	if next_level:
-		print("hello :) ")
 		game_manager.count_score(next_level)

@@ -4,6 +4,8 @@ extends Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var mario = get_parent().get_node("/root/LevelBase/mario")
+
 
 var isTouched = false
 
@@ -18,11 +20,8 @@ func _ready() -> void:
 		setAnimation()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if not isSpawnedByBlock and not isTouched:
-		isTouched = true
-		body.increase_coin(1,self)
-		common.play_audio(self,preload("res://assets/sound/sfx/coin.wav"))
-		self.queue_free()
+	if not isSpawnedByBlock:
+		take()
 
 
 func setAnimation():
@@ -31,3 +30,10 @@ func setAnimation():
 			animated_sprite_2d.play("default")
 		common.theme.UNDERGROUND:
 			animated_sprite_2d.play("default_underground")
+
+func take():
+	if not isTouched:
+		isTouched = true
+		mario.increase_coin(1,self)
+		common.play_audio(self,preload("res://assets/sound/sfx/coin.wav"))
+		self.queue_free()

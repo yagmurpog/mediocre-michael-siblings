@@ -86,6 +86,7 @@ down={
 2d_physics/layer_8="koopa troopa"
 2d_physics/layer_9="pipe entrance"
 2d_physics/layer_10="tileset"
+2d_physics/layer_11="coin"
 
 [physics]
 
